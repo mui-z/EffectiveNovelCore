@@ -3,8 +3,9 @@
 //
 
 public enum ParseError: Error, Equatable {
-    case commandNotFound(message: String)
+    case unknownTag(message: String)
     case invalidBracketsPair(message: String)
+    case notFoundEndTag
 }
 
 public enum DisplayEvent: Equatable {
@@ -37,7 +38,7 @@ public enum DisplayEvent: Equatable {
         case "e":
             return .end
         default:
-            throw ParseError.commandNotFound(message: "this tag not found: \(rawCommand)")
+            throw ParseError.unknownTag(message: "this tag not found: \(rawCommand)")
         }
     }
 }

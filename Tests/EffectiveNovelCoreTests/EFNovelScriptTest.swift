@@ -10,8 +10,8 @@ import Combine
 final class EFNovelScriptTest: XCTestCase {
 
     func testValidateSuccess() {
-        let rawText = "ab[cl]d"
-        let expect = EFNovelScript(events: [.character(char: "a"), .character(char: "b"), .clear, .character(char: "d")])
+        let rawText = "ab[cl]d[e]"
+        let expect = EFNovelScript(events: [.character(char: "a"), .character(char: "b"), .clear, .character(char: "d"), .end])
 
         switch EFNovelScript.validate(rawText: rawText) {
         case .success(let script):
@@ -22,8 +22,8 @@ final class EFNovelScriptTest: XCTestCase {
     }
 
     func testInvalidCommand() {
-        let rawText = "ab[a]d"
-        let expect = ParseError.commandNotFound(message: "this tag not found: a")
+        let rawText = "ab[a]d[e]"
+        let expect = ParseError.unknownTag(message: "this tag not found: a")
 
         switch EFNovelScript.validate(rawText: rawText) {
         case .success(_):
@@ -34,11 +34,11 @@ final class EFNovelScriptTest: XCTestCase {
     }
 
     func testInvalidFrontOnlyBrackets() {
-        let rawText = "ab[cdf"
+        let rawText = "ab[cdf[e]"
         let expect = ParseError.invalidBracketsPair(message: "brackets pair broken")
 
         switch EFNovelScript.validate(rawText: rawText) {
-        case .success(let script):
+        case .success(_):
             XCTFail()
         case .failure(let error):
             XCTAssertEqual(expect, error)
@@ -46,11 +46,23 @@ final class EFNovelScriptTest: XCTestCase {
     }
 
     func testInvalidRearOnlyBrackets() {
-        let rawText = "abc]df"
+        let rawText = "abc]df[e]"
         let expect = ParseError.invalidBracketsPair(message: "brackets pair broken")
 
         switch EFNovelScript.validate(rawText: rawText) {
-        case .success(let script):
+        case .success(_):
+            XCTFail()
+        case .failure(let error):
+            XCTAssertEqual(expect, error)
+        }
+    }
+
+    func testNotFoundEndTag() {
+        let rawText = "abc[cl]df"
+        let expect = ParseError.notFoundEndTag
+
+        switch EFNovelScript.validate(rawText: rawText) {
+        case .success(_):
             XCTFail()
         case .failure(let error):
             XCTAssertEqual(expect, error)
