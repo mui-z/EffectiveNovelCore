@@ -14,6 +14,10 @@ Also, this lib is not optimized novel game.
 Because this doesn't have if functioned, macro, subroutine.
 
 ## Syntax
+
+### Syntax Tags
+Tags must be enclosed in `[]`.
+
 | tag              | DisplayEvent            | mean                                                                |
 |------------------|-------------------------|---------------------------------------------------------------------|
 | n                | `.newline`              | newline                                                             |
@@ -23,6 +27,9 @@ Because this doesn't have if functioned, macro, subroutine.
 | delay speed=xxxx | `.delay(speed: Double)` | change delay character displayed speed. speed unit is milliseconds. |
 | resetdelay       | `.resetDelay`           | reset delay speed                                                   |
 | e                | `.end`                  | stop script novel end point                                         |
+
+
+### Example Novel Text
 
 ```
 start text[n]
