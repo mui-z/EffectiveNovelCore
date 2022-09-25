@@ -14,7 +14,7 @@ Also, this lib is not optimized novel game.
 Because this doesn't have if functioned, macro, subroutine.
 
 ## Syntax
-| command          | DisplayEvent            | mean                                                                |
+| tag              | DisplayEvent            | mean                                                                |
 |------------------|-------------------------|---------------------------------------------------------------------|
 | n                | `.newline`              | newline                                                             |
 | tw               | `.tapWait`              | tap wait                                                            |
