@@ -69,11 +69,14 @@ controller.start()
 // (4.) show text until wait tag
 controller.showTextUntilWaitTag()
 
-// (5.) resume tap wait
+// (5.) pause stream.
+controller.pause()
+
+// (6.) resume on pause
 // If you want to start from any index number, you can use `controller.resume(at: 100)`
 controller.resume() 
 
-// (6.) interrupt
+// (7.) interrupt
 controller.interrupt()
 
 
