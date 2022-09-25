@@ -23,7 +23,7 @@ Because this doesn't have if functioned, macro, subroutine.
 ### Syntax Tags
 Tags must be enclosed in `[]`.
 
-| tag              | DisplayEvent            | mean                                                                |
+| tag              | DisplayEvent            | description                                                         |
 |------------------|-------------------------|---------------------------------------------------------------------|
 | n                | `.newline`              | newline                                                             |
 | tw               | `.tapWait`              | tap wait                                                            |
