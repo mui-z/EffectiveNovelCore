@@ -80,7 +80,7 @@ controller.showTextUntilWaitTag()
 // (5.) pause stream.
 controller.pause()
 
-// (6.) resume on pause
+// (6.) resume from pause
 // If you want to start from any index number, you can use `controller.resume(at: 100)`
 controller.resume() 
 
