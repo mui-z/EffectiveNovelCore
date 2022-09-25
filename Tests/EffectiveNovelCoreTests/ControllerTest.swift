@@ -139,11 +139,40 @@ final class ControllerTest: XCTestCase {
         expectation.expectedFulfillmentCount = 43
 
         controller.load(raw: "s[delay speed=1]0123456789012345678901234567890123456789[e]")
+
         controller.start()
                   .sink { event in
                       expectation.fulfill()
                   }
                   .store(in: &cancellables)
+
+        waitForExpectations(timeout: 1)
+
+        XCTAssertEqual(controller.state, .prepare)
+    }
+
+    func testPause() {
+        let expectation = expectation(description: #function)
+        let controller = NovelController()
+
+        expectation.expectedFulfillmentCount = 12
+
+        controller.load(raw: "[delay speed=1]0123456789[e]")
+
+        controller.start()
+                  .sink { event in
+                      expectation.fulfill()
+
+                      if event == .character(char: "2") {
+                          controller.pause()
+                          XCTAssertEqual(controller.state, .pause)
+                          controller.resume()
+                      }
+                  }
+                  .store(in: &cancellables)
+
+
+        XCTAssertEqual(controller.state, .running)
 
         waitForExpectations(timeout: 1)
 

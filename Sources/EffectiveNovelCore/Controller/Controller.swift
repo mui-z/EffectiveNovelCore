@@ -82,6 +82,15 @@ public class NovelController {
         index = 0
     }
 
+    public func pause() {
+        switch state {
+        case .running:
+            state = .pause
+        default:
+            print("now state is not running. now state: \(state)")
+        }
+    }
+
     public func showTextUntilWaitTag() {
         let offset: Int = index
 
