@@ -90,7 +90,7 @@ controller.interrupt()
 
 
 ## Examples
-- [ ] CLI novel reader
+- [ ] CUI novel reader
 - [ ] iOS novel reader
 
 ## Todo
