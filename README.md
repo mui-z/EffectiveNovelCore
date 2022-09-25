@@ -37,9 +37,9 @@ Tags must be enclosed in `[]`.
 
 ### Example Novel Text
 
-```
-start text[n]
+file extension is `.ens` (effective novel script)
 
+```sample.ens
 tap waiting and newline[twn]
 
 [cl] cleared text.
