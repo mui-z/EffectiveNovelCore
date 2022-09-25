@@ -122,7 +122,7 @@ public class NovelController {
 
                     internalOutputStream.send(event)
 
-                    // handle on interrupted
+                    // handle for interrupted
                     if state == .loadWait {
                         reset()
                         break
