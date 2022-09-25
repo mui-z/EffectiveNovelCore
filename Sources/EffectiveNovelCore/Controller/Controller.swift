@@ -11,7 +11,18 @@ enum NovelState {
 
 let defaultSpeed: Double = 250
 
-public class NovelController {
+protocol Controller {
+    func load(raw: String) -> Result<EFNovelScript, ParseError>
+    func start(script: EFNovelScript) -> AnyPublisher<DisplayEvent, Never>
+    func interrupt()
+    func resume()
+    func resume(at resumeIndex: Int)
+    func reset()
+    func pause()
+    func showTextUntilWaitTag()
+}
+
+public class NovelController: Controller {
 
     public init() {
     }

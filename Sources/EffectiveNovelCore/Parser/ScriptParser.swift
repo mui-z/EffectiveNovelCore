@@ -5,7 +5,7 @@
 import Foundation
 
 protocol Parser {
-//    func parse(rawAllString: String) throws -> [DisplayEvent]
+    func parse(rawAllString: String) throws -> [DisplayEvent]
 }
 
 struct ScriptParser: Parser {
@@ -33,7 +33,6 @@ struct ScriptParser: Parser {
     }
 
     //  cm] or cm]text
-
     private func splitCommandIncludingText(raw: String) throws -> [DisplayEvent] {
         var result: [DisplayEvent] = []
         let commandAndText = raw.components(separatedBy: "]")
