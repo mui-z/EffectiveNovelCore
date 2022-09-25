@@ -33,7 +33,7 @@ public class NovelController {
         state = .prepare
         index = 0
 
-        displayEvents = parser.parse(rawAllString: raw)
+        displayEvents = try! parser.parse(rawAllString: raw)
     }
 
     public func start() -> AnyPublisher<DisplayEvent, Never> {

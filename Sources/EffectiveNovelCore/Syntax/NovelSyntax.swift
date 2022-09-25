@@ -2,6 +2,11 @@
 // Created by osushi on 2022/09/23.
 //
 
+public enum ParseError: Error, Equatable {
+    case commandNotFound(message: String)
+    case invalidBracketsPair(message: String)
+}
+
 public enum DisplayEvent: Equatable {
     case character(char: Character)
     case newline
@@ -14,7 +19,7 @@ public enum DisplayEvent: Equatable {
 
     case end
 
-    static func parseCommand(rawCommand: String) -> DisplayEvent {
+    static func parseCommand(rawCommand: String) throws -> DisplayEvent {
         switch rawCommand {
         case "n":
             return .newline
@@ -32,7 +37,7 @@ public enum DisplayEvent: Equatable {
         case "e":
             return .end
         default:
-            fatalError(file: #file)
+            throw ParseError.commandNotFound(message: "this tag not found: \(rawCommand)")
         }
     }
 }
