@@ -45,6 +45,8 @@ tap waiting and newline[twn]
 
 very fast stream after this text[delay speed=2][n]
 
+very fast displaying!!!!!!
+
 [resetdelay]reset delay speed.[n]
 
 end. [e]
