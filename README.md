@@ -45,7 +45,7 @@ end. [e]
 // 1. get `NovelController` instance
 let controller = NovelController()
 
-// 2. pass to raw novel text
+// 2. load raw novel text
 controller.load(rawText: rawText)
 
 // 3. start() and listening stream
