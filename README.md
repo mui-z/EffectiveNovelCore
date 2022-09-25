@@ -60,11 +60,22 @@ end. [e]
 // 1. get `NovelController` instance
 let controller = NovelController()
 
+
 // 2. load raw novel text
-controller.load(rawText: rawText)
+let result: Result<EFNovelScript, ParseError> = controller.load(rawText: rawText)
+
+let validScript: EFNovelScript
+
+switch result {
+case .success(let script):
+    validScript = script
+case .failure(let error):
+    print(error)
+    // handle error.
+}
 
 // 3. start() and listening stream
-controller.start()
+controller.start(script: validScript)
           .sink { event in
               switch event {
               case .character(let char):
