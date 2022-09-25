@@ -79,4 +79,5 @@ controller.interrupt()
 - [ ] iOS novel reader
 
 ## Todo
-- value input
+- [ ] value input
+- [ ] novel text validator
