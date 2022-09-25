@@ -100,3 +100,4 @@ controller.interrupt()
 - [ ] value input
 - [ ] novel text validator
 - [ ] play sound
+- [ ] Swift-DocC
