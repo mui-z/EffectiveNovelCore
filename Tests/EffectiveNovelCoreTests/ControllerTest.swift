@@ -18,7 +18,7 @@ final class ControllerTest: XCTestCase {
     func testLoad() {
         let controller = NovelController()
 
-        controller.load(raw: "abc[e]")
+        controller.load(raw: "[delay speed=1]abc[e]")
 
         XCTAssertEqual(controller.state, .prepare)
     }

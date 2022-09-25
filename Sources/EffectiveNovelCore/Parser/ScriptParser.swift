@@ -11,7 +11,7 @@ protocol Parser {
 struct ScriptParser: Parser {
     func validate(rawText: String) -> Bool {
         do {
-            let _ = try parse(rawAllString: rawText)
+            _ = try parse(rawAllString: rawText)
             return true
         } catch {
             return false
@@ -67,6 +67,6 @@ struct ScriptParser: Parser {
 
 private extension String {
     func countChar(char: Character) -> Int {
-        return filter({ $0 == char }).count
+        filter({ $0 == char }).count
     }
 }
