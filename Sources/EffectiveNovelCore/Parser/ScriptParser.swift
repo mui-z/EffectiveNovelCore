@@ -14,12 +14,6 @@ struct ScriptParser: Parser {
         rawAllString.removeAll(where: { $0 == "\n" })
 
         do {
-            guard rawAllString.countChar(char: "[" ) == rawAllString.countChar(char: "]") else {
-                throw ParseError.invalidBracketsPair(message: "brackets pair broken")
-            }
-
-            guard rawAllString.contains("[e]") else { throw ParseError.notFoundEndTag }
-
             let events = try rawAllString.components(separatedBy: "[")
                                          .filter { !$0.isEmpty }
                                          .map { (raw: $0, isCommandInclude: $0.contains("]")) }
@@ -54,10 +48,4 @@ struct ScriptParser: Parser {
         string.map { c in DisplayEvent.character(char: c) }
     }
 
-}
-
-private extension String {
-    func countChar(char: Character) -> Int {
-        filter({ $0 == char }).count
-    }
 }
