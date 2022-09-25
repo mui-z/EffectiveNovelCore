@@ -5,19 +5,10 @@
 import Foundation
 
 protocol Parser {
-    func parse(rawAllString: String) throws -> [DisplayEvent]
+//    func parse(rawAllString: String) throws -> [DisplayEvent]
 }
 
 struct ScriptParser: Parser {
-    func validate(rawText: String) -> Bool {
-        do {
-            _ = try parse(rawAllString: rawText)
-            return true
-        } catch {
-            return false
-        }
-    }
-
     func parse(rawAllString raw: String) throws -> [DisplayEvent] {
         var rawAllString = raw
         rawAllString.removeAll(where: { $0 == "\n" })
@@ -63,6 +54,7 @@ struct ScriptParser: Parser {
     private func stringToCharacter(string: String) -> [DisplayEvent] {
         string.map { c in DisplayEvent.character(char: c) }
     }
+
 }
 
 private extension String {

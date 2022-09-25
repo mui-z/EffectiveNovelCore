@@ -28,17 +28,17 @@ public class NovelController {
 
     private(set) var state = NovelState.loadWait
 
-    public func load(raw: String) {
-        let parser = ScriptParser()
+    public func load(raw: String) -> Result<EFNovelScript, ParseError> {
         state = .prepare
         index = 0
 
-        displayEvents = try! parser.parse(rawAllString: raw)
+        return EFNovelScript.validate(rawText: raw)
     }
 
-    public func start() -> AnyPublisher<DisplayEvent, Never> {
+    public func start(script: EFNovelScript) -> AnyPublisher<DisplayEvent, Never> {
         switch state {
         case .prepare:
+            displayEvents = script.displayEvents
             state = .running
             startLoop()
         default:

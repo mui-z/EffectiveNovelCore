@@ -18,20 +18,24 @@ final class ControllerTest: XCTestCase {
     func testLoad() {
         let controller = NovelController()
 
-        controller.load(raw: "[delay speed=1]abc[e]")
+        switch controller.load(raw: "[delay speed=1]abc[e]") {
+        case .success(_):
+            XCTAssertEqual(controller.state, .prepare)
+        case .failure:
+            XCTFail()
+        }
 
-        XCTAssertEqual(controller.state, .prepare)
     }
 
     func testStart() {
         let expectation = expectation(description: #function)
         let controller = NovelController()
 
-        controller.load(raw: "abc[e]")
-
         expectation.expectedFulfillmentCount = 4
 
-        let stream = controller.start()
+        let script = try! controller.load(raw: "abc[e]").get()
+
+        let stream = controller.start(script: script)
         stream
             .sink { event in
                 expectation.fulfill()
@@ -48,9 +52,9 @@ final class ControllerTest: XCTestCase {
         let expectation = expectation(description: #function)
         let controller = NovelController()
 
-        controller.load(raw: "abc[e]")
+        let script = try! controller.load(raw: "abc[e]").get()
 
-        controller.start()
+        controller.start(script: script)
                   .sink { event in
                       expectation.fulfill()
                       controller.interrupt()
@@ -67,9 +71,9 @@ final class ControllerTest: XCTestCase {
 
         expectation.expectedFulfillmentCount = 4
 
-        controller.load(raw: "a[tw]b[e]")
+        let script = try! controller.load(raw: "a[tw]b[e]").get()
 
-        controller.start()
+        controller.start(script: script)
                   .delay(for: 0.001, scheduler: RunLoop.main)
                   .sink { event in
                       expectation.fulfill()
@@ -91,9 +95,9 @@ final class ControllerTest: XCTestCase {
 
         expectation.expectedFulfillmentCount = 8
 
-        controller.load(raw: "0123[tw]5678[e]")
+        let script = try! controller.load(raw: "0123[tw]5678[e]").get()
 
-        controller.start()
+        controller.start(script: script)
                   .delay(for: 0.001, scheduler: RunLoop.main)
                   .sink { event in
                       expectation.fulfill()
@@ -115,9 +119,9 @@ final class ControllerTest: XCTestCase {
 
         expectation.expectedFulfillmentCount = 32
 
-        controller.load(raw: "s012345678901234567890123456789[tw]123[e]")
+        let script = try! controller.load(raw: "s012345678901234567890123456789[tw]123[e]").get()
 
-        controller.start()
+        controller.start(script: script)
                   .sink { event in
                       expectation.fulfill()
 
@@ -138,9 +142,9 @@ final class ControllerTest: XCTestCase {
 
         expectation.expectedFulfillmentCount = 43
 
-        controller.load(raw: "s[delay speed=1]0123456789012345678901234567890123456789[e]")
+        let script = try! controller.load(raw: "s[delay speed=1]0123456789012345678901234567890123456789[e]").get()
 
-        controller.start()
+        controller.start(script: script)
                   .sink { event in
                       expectation.fulfill()
                   }
@@ -157,9 +161,9 @@ final class ControllerTest: XCTestCase {
 
         expectation.expectedFulfillmentCount = 12
 
-        controller.load(raw: "[delay speed=1]0123456789[e]")
+        let script = try! controller.load(raw: "[delay speed=1]0123456789[e]").get()
 
-        controller.start()
+        controller.start(script: script)
                   .sink { event in
                       expectation.fulfill()
 
