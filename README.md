@@ -1,6 +1,5 @@
 ![workflow status](https://github.com/mui-z/effective-novel-core/actions/workflows/swift.yaml/badge.svg)
 [![License](https://img.shields.io/github/license/mui-z/GithubRepoSearcher?labelColor=333333)](https://github.com/mui-z/effective-novel-core/blob/main/LICENSE)
-[![Platform](https://img.shields.io/badge/platform-iOS-lightgrey?labelColor=333333)](https://github.com/mui-z/effective-novel-core)
 [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/mui_z_.svg?style=social&label=Follow%20%40mui-z)](https://twitter.com/mui_z_)
 
 
