@@ -110,6 +110,5 @@ controller.interrupt()
 ## Todo
 - [ ] value input
 - [x] novel text validator
-- [ ] play sound
 - [ ] Swift-DocC
 - [ ] comment out
