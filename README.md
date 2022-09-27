@@ -110,5 +110,7 @@ controller.interrupt()
 ## Todo
 - [ ] value input
 - [x] novel text validator
+- [ ] rearchitecture
+- [ ] output invalid syntax point message.
 - [ ] Swift-DocC
 - [ ] comment out
