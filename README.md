@@ -6,7 +6,7 @@
 
 # Effective Novel Core
 
-This is novel text parse and stream provide package.
+This is novel text parse and provide display event stream package.
 
 ## About
 This is novel engine.
