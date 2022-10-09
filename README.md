@@ -20,6 +20,8 @@ Also, this lib is not optimized novel game.
 Because this doesn't have if functioned, macro, subroutine.
 
 ## Syntax
+Use tags to control how they are displayed.  
+This syntax is based on [Tyranoscript](https://tyrano.jp/).
 
 ### Syntax Tags
 Tags must be enclosed in `[]`.
@@ -36,8 +38,6 @@ Tags must be enclosed in `[]`.
 
 
 ### Example Novel Text
-
-file extension is `.ens` (effective novel script)
 
 ```sample.ens
 tap waiting and newline[twn]
@@ -101,16 +101,14 @@ controller.interrupt()
 
 ```
 
-
-
 ## Examples
 - [ ] CUI novel reader
 - [ ] iOS novel reader
+  - [EffectiveNovelReader](https://github.com/mui-z/EffectiveNovelReader)
 
 ## Todo
 - [ ] value input
 - [x] novel text validator
 - [x] rearchitecture
-- [ ] output invalid syntax point message.
 - [ ] Swift-DocC
-- [ ] comment out
+- [ ] comment out syntax
