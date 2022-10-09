@@ -28,7 +28,7 @@ Tags must be enclosed in `[]`.
 |------------------|-------------------------|---------------------------------------------------------------------|
 | n                | `.newline`              | newline                                                             |
 | tw               | `.tapWait`              | tap wait                                                            |
-| twn              | `.tapWaitAndNewline`     | tap wait and newline                                                |
+| twn              | `.tapWaitAndNewline`    | tap wait and newline                                                |
 | cl               | `.clear`                | clear                                                               |
 | delay speed=xxxx | `.delay(speed: Double)` | change delay character displayed speed. speed unit is milliseconds. |
 | resetdelay       | `.resetDelay`           | reset delay speed                                                   |
