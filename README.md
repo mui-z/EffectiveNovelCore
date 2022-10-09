@@ -34,7 +34,7 @@ Tags must be enclosed in `[]`.
 | cl                         | `.clear`                          | clear                                                                       |
 | delay speed=xxxx           | `.delay(speed: Double)`           | change delay character displayed speed. speed unit is milliseconds.         |
 | setDefaultDelay speed=xxxx | `.setDefaultDelay(speed: Double)` | change default delay character displayed speed. speed unit is milliseconds. |
-| resetdelay                 | `.resetDelay`                     | reset delay speed                                                           |
+| resetDelay                 | `.resetDelay`                     | reset delay speed                                                           |
 | e                          | `.end`                            | stop script novel end point                                                 |
 
 
