@@ -112,3 +112,6 @@ controller.interrupt()
 - [x] rearchitecture
 - [ ] Swift-DocC
 - [ ] comment out syntax
+
+## LICENSE
+EffectiveNovelCore is licensed under the MIT [License](LICENSE)
