@@ -49,7 +49,7 @@ very fast stream after this text[delay speed=2][n]
 
 displaying!!!!!!
 
-[resetdelay]reset delay speed.[n]
+[resetDelay]reset delay speed.[n]
 
 end. [e]
 ```
