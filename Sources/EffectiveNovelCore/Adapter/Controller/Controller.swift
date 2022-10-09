@@ -10,7 +10,7 @@ enum NovelState {
     case loadWait, prepare, running, pause
 }
 
-let defaultSpeed: Double = 250
+let defaultSpeed: Double = 90
 
 protocol Controller {
     func load(raw: String) -> ValidateResult<EFNovelScript, [ValidationError]>
