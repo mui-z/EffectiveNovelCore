@@ -60,7 +60,7 @@ internal struct ScriptParser: Parser {
             return .clear
         case "resetdelay":
             return .resetDelay
-        case (let tag) where tag.hasPrefix("setdefaultdelay"):
+        case (let tag) where tag.hasPrefix("setDefaultDelay"):
             let speed = Double(tag.split(separator: "=").last!)!
             return .setDefaultDelay(speed: speed)
         case (let tag) where tag.hasPrefix("delay speed"):
