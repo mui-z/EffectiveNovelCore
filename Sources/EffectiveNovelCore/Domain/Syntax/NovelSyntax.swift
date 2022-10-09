@@ -14,6 +14,7 @@ enum TagParseError: Error, Equatable {
 
 public enum DisplayEvent: Equatable {
     case character(char: Character)
+    case setDefaultDelay(speed: Double)
     case newline
     case tapWait
     case tapWaitAndNewline

@@ -10,8 +10,6 @@ enum NovelState {
     case loadWait, prepare, running, pause
 }
 
-let defaultSpeed: Double = 90
-
 protocol Controller {
     func load(raw: String) -> ValidateResult<EFNovelScript, [ValidationError]>
     func start(script: EFNovelScript) -> AnyPublisher<DisplayEvent, Never>
@@ -43,7 +41,9 @@ public class NovelController: Controller {
 
     private(set) var index: Int = 0
 
-    private(set) var speed: Double = defaultSpeed
+    private(set) lazy var defaultSpeed: Double = systemDefaultSpeed
+
+    private(set) lazy var speed: Double = systemDefaultSpeed
 
     private(set) var state = NovelState.loadWait
 
@@ -99,6 +99,8 @@ public class NovelController: Controller {
         state = .loadWait
         displayEvents = []
         index = 0
+        defaultSpeed = systemDefaultSpeed
+        speed = systemDefaultSpeed
     }
 
     public func pause() {
@@ -147,12 +149,6 @@ public class NovelController: Controller {
                         break
                     }
 
-                    // finish
-                    if displayEvents[index] == .end {
-                        state = .prepare
-                        break
-                    }
-
                     index += 1
                     await handleEvent(event: event)
                 case .prepare:
@@ -180,12 +176,19 @@ public class NovelController: Controller {
             try! await Task.sleep(nanoseconds: UInt64(speed * Double(pow(10.0, 6))))
         case .delay(let duration):
             speed = duration
+        case .setDefaultDelay(let duration):
+            defaultSpeed = duration
+            speed = duration
         case .resetDelay:
             speed = defaultSpeed
         case .tapWait, .tapWaitAndNewline:
             state = .pause
+        case .end:
+            reset()
         default:
-            print("default")
+            break
         }
     }
+
+    private let systemDefaultSpeed: Double = 90
 }

@@ -47,12 +47,45 @@ final class ControllerTest: XCTestCase {
             XCTAssertEqual(controller.state, .running)
 
             waitForExpectations(timeout: 3)
-            XCTAssertEqual(controller.state, .prepare)
+            XCTAssertEqual(controller.state, .loadWait)
 
         case .invalid:
             XCTFail()
         }
 
+    }
+
+    func testSetDefaultDelay() {
+        let expectation = expectation(description: #function)
+        let controller = NovelController()
+
+        expectation.expectedFulfillmentCount = 5
+        let result = controller.load(raw: "[setdefaultdelay=123]abc[e]")
+
+        switch result {
+        case .valid(let script):
+            controller.start(script: script)
+                      .delay(for: 0.1, scheduler: RunLoop.main)
+                      .sink { event in
+                          expectation.fulfill()
+                          switch event {
+                          case .end:
+                              XCTAssertEqual(controller.defaultSpeed, 90.0)
+                              XCTAssertEqual(controller.speed, 90.0)
+                              XCTAssertEqual(controller.state, .loadWait)
+
+                          default:
+                              XCTAssertEqual(controller.defaultSpeed, 123.0)
+                              XCTAssertEqual(controller.speed, 123.0)
+                              XCTAssertEqual(controller.state, .running)
+                          }
+                      }
+                      .store(in: &cancellables)
+
+            waitForExpectations(timeout: 1)
+        case .invalid:
+            XCTFail()
+        }
     }
 
     func testInterrupt() {
@@ -101,7 +134,7 @@ final class ControllerTest: XCTestCase {
 
             waitForExpectations(timeout: 2)
 
-            XCTAssertEqual(controller.state, .prepare)
+            XCTAssertEqual(controller.state, .loadWait)
 
         case .invalid:
             XCTFail()
@@ -132,7 +165,7 @@ final class ControllerTest: XCTestCase {
 
             waitForExpectations(timeout: 2)
 
-            XCTAssertEqual(controller.state, .prepare)
+            XCTAssertEqual(controller.state, .loadWait)
         case .invalid:
             XCTFail()
         }
@@ -186,7 +219,7 @@ final class ControllerTest: XCTestCase {
 
             waitForExpectations(timeout: 1)
 
-            XCTAssertEqual(controller.state, .prepare)
+            XCTAssertEqual(controller.state, .loadWait)
 
         case .invalid:
             XCTFail()
@@ -220,7 +253,7 @@ final class ControllerTest: XCTestCase {
 
             waitForExpectations(timeout: 1)
 
-            XCTAssertEqual(controller.state, .prepare)
+            XCTAssertEqual(controller.state, .loadWait)
         case .invalid:
             XCTFail()
         }
