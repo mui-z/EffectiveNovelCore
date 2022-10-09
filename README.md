@@ -26,15 +26,16 @@ This syntax is based on [Tyranoscript](https://tyrano.jp/).
 ### Syntax Tags
 Tags must be enclosed in `[]`.
 
-| tag              | DisplayEvent            | description                                                         |
-|------------------|-------------------------|---------------------------------------------------------------------|
-| n                | `.newline`              | newline                                                             |
-| tw               | `.tapWait`              | tap wait                                                            |
-| twn              | `.tapWaitAndNewline`    | tap wait and newline                                                |
-| cl               | `.clear`                | clear                                                               |
-| delay speed=xxxx | `.delay(speed: Double)` | change delay character displayed speed. speed unit is milliseconds. |
-| resetdelay       | `.resetDelay`           | reset delay speed                                                   |
-| e                | `.end`                  | stop script novel end point                                         |
+| tag                        | DisplayEvent                      | description                                                                 |
+|----------------------------|-----------------------------------|-----------------------------------------------------------------------------|
+| n                          | `.newline`                        | newline                                                                     |
+| tw                         | `.tapWait`                        | tap wait                                                                    |
+| twn                        | `.tapWaitAndNewline`              | tap wait and newline                                                        |
+| cl                         | `.clear`                          | clear                                                                       |
+| delay speed=xxxx           | `.delay(speed: Double)`           | change delay character displayed speed. speed unit is milliseconds.         |
+| setdefaultdelay speed=xxxx | `.setDefaultDelay(speed: Double)` | change default delay character displayed speed. speed unit is milliseconds. |
+| resetdelay                 | `.resetDelay`                     | reset delay speed                                                           |
+| e                          | `.end`                            | stop script novel end point                                                 |
 
 
 ### Example Novel Text
