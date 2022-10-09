@@ -4,11 +4,11 @@
 
 import Foundation
 
-protocol Parser {
+internal protocol Parser {
     func parse(rawString: String) throws -> [DisplayEvent]
 }
 
-struct ScriptParser: Parser {
+internal struct ScriptParser: Parser {
     func parse(rawString raw: String) throws -> [DisplayEvent] {
         var rawAllString = raw
         rawAllString.removeAll(where: { $0 == "\n" })

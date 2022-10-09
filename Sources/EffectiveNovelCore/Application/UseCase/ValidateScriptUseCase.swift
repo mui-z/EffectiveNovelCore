@@ -9,11 +9,11 @@ public enum ValidateResult<SUCCESS, ERROR> {
     case invalid(ERROR)
 }
 
-protocol ValidateScriptUseCase {
+internal protocol ValidateScriptUseCase {
     func validate(rawAllString: String) -> ValidateResult<EFNovelScript, [ValidationError]>
 }
 
-struct ValidateScriptUseCaseImpl: ValidateScriptUseCase {
+internal struct ValidateScriptUseCaseImpl: ValidateScriptUseCase {
     func validate(rawAllString: String) -> ValidateResult<EFNovelScript, [ValidationError]> {
 
         var validationResults = [Result<(), ValidationError>]()

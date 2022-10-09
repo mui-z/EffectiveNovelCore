@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct ParseToDisplayEventsValidator: LineSyntaxValidator {
+internal struct ParseToDisplayEventsValidator: LineSyntaxValidator {
     func validate(lineRawText: String, lineNo: Int) -> Result<(), ValidationError> {
         let parser = ScriptParser()
 
