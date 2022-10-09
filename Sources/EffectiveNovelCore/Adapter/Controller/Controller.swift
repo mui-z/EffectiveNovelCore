@@ -4,6 +4,7 @@
 
 import Foundation
 import Combine
+import Factory
 
 enum NovelState {
     case loadWait, prepare, running, pause
@@ -12,7 +13,7 @@ enum NovelState {
 let defaultSpeed: Double = 250
 
 protocol Controller {
-    func load(raw: String) -> Result<EFNovelScript, ParseError>
+    func load(raw: String) -> ValidateResult<EFNovelScript, [ValidationError]>
     func start(script: EFNovelScript) -> AnyPublisher<DisplayEvent, Never>
     func interrupt()
     func resume()
@@ -20,12 +21,19 @@ protocol Controller {
     func reset()
     func pause()
     func showTextUntilWaitTag()
+
+    var index: Int { get }
+    var speed: Double { get }
+    var state: NovelState { get }
 }
 
 public class NovelController: Controller {
 
     public init() {
     }
+
+    @Injected(Container.validateScriptUseCase)
+    var validateScriptUseCase: ValidateScriptUseCase
 
     private var internalOutputStream = PassthroughSubject<DisplayEvent, Never>()
 
@@ -39,11 +47,11 @@ public class NovelController: Controller {
 
     private(set) var state = NovelState.loadWait
 
-    public func load(raw: String) -> Result<EFNovelScript, ParseError> {
+    public func load(raw: String) -> ValidateResult<EFNovelScript, [ValidationError]> {
         state = .prepare
         index = 0
 
-        return EFNovelScript.validate(rawText: raw)
+        return validateScriptUseCase.validate(rawAllString: raw)
     }
 
     public func start(script: EFNovelScript) -> AnyPublisher<DisplayEvent, Never> {
