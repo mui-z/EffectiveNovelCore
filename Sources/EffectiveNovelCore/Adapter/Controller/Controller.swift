@@ -113,6 +113,8 @@ public class NovelController: Controller {
     }
 
     public func showTextUntilWaitTag() {
+        guard state == .running else { return }
+
         let offset: Int = index
 
         let checkListRange = displayEvents[offset..<displayEvents.count]
