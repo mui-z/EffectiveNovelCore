@@ -65,6 +65,7 @@ final class ControllerTest: XCTestCase {
         switch result {
         case .valid(let script):
             controller.start(script: script)
+                      .delay(for: 0.1, scheduler: RunLoop.main)
                       .sink { event in
                           expectation.fulfill()
                           switch event {
@@ -183,7 +184,7 @@ final class ControllerTest: XCTestCase {
 
         case .valid(let script):
             controller.start(script: script)
-                      .print()
+                      .delay(for: 0.1, scheduler: RunLoop.main)
                       .sink { event in
                           expectation.fulfill()
 
@@ -198,7 +199,39 @@ final class ControllerTest: XCTestCase {
                       }
                       .store(in: &cancellables)
 
-            waitForExpectations(timeout: 1)
+            waitForExpectations(timeout: 2)
+
+            XCTAssertEqual(controller.state, .loadWait)
+        case .invalid:
+            XCTFail()
+        }
+    }
+
+    func testShowUntilWaitTagWithoutWaitTag() {
+        let expectation = expectation(description: #function)
+        let controller = NovelController()
+
+        expectation.expectedFulfillmentCount = 32
+
+        let result = controller.load(raw: "s012345678901234567890123456789[e]")
+
+        switch result {
+
+        case .valid(let script):
+            controller.start(script: script)
+                      .sink { event in
+                          expectation.fulfill()
+
+                          switch event {
+                          case .character(let char) where char == "s":
+                              controller.showTextUntilWaitTag()
+                          default:
+                              break
+                          }
+                      }
+                      .store(in: &cancellables)
+
+            waitForExpectations(timeout: 5)
 
             XCTAssertEqual(controller.state, .loadWait)
         case .invalid:
