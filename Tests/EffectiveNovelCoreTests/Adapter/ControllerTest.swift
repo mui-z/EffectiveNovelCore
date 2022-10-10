@@ -37,12 +37,11 @@ final class ControllerTest: XCTestCase {
 
         switch result {
         case .valid(let script):
-            let stream = controller.start(script: script)
-            stream
-                .sink { event in
-                    expectation.fulfill()
-                }
-                .store(in: &cancellables)
+            controller.start(script: script)
+                      .sink { event in
+                          expectation.fulfill()
+                      }
+                      .store(in: &cancellables)
 
             XCTAssertEqual(controller.state, .running)
 
