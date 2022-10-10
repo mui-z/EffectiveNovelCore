@@ -7,7 +7,7 @@ import Combine
 import Factory
 
 enum NovelState {
-    case loadWait, prepare, running, pause, processing
+    case loadWait, prepare, running, pause
 }
 
 protocol Controller {
@@ -64,7 +64,9 @@ public class NovelController: Controller {
             print("now state is not prepare. now state: \(state)")
         }
 
-        return internalOutputStream.eraseToAnyPublisher()
+        return internalOutputStream
+            .delay(for: 0.1, scheduler: RunLoop.main)
+            .eraseToAnyPublisher()
     }
 
     public func interrupt() {
@@ -114,19 +116,17 @@ public class NovelController: Controller {
 
     public func showTextUntilWaitTag() {
         guard state == .running else { return }
-        state = .processing
 
         let offset: Int = index
 
         let checkListRange = displayEvents[offset..<displayEvents.count]
         let endIndex = checkListRange
-            .firstIndex(where: { $0 == .tapWaitAndNewline || $0 == .tapWait || $0 == .end })
+            .firstIndex(where: { $0 == .tapWaitAndNewline || $0 == .tapWait })
             .map { $0 - 1 } ?? (index - 3 < 0 ? index + 2 : (index - 3))
 
         let events = displayEvents[(index + 1)...endIndex]
 
         index += events.count
-        state = .running
         events.forEach { internalOutputStream.send($0) }
     }
 
@@ -156,8 +156,6 @@ public class NovelController: Controller {
                     index += 1
                     await handleEvent(event: event)
                 case .prepare:
-                    break
-                case .processing:
                     break
                 case .loadWait:
                     break
