@@ -124,7 +124,7 @@ public class NovelController: Controller {
             .firstIndex(where: { $0 == .tapWaitAndNewline || $0 == .tapWait })
             .map { $0 - 1 } ?? (index - 3 < 0 ? index + 2 : (index - 3))
 
-        let events = displayEvents[(index + 1)...endIndex]
+        let events = displayEvents[(index)...endIndex]
 
         index += events.count
         events.forEach { internalOutputStream.send($0) }

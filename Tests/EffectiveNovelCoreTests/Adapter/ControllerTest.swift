@@ -175,9 +175,9 @@ final class ControllerTest: XCTestCase {
         let expectation = expectation(description: #function)
         let controller = NovelController()
 
-        expectation.expectedFulfillmentCount = 36
+        expectation.expectedFulfillmentCount = 37
 
-        let result = controller.load(raw: "s01234567890123456789012345678x[tw]abc[e]")
+        let result = controller.load(raw: "[delay speed=100]s01234567890123456789012345678x[tw]abc[e]")
 
         switch result {
 
