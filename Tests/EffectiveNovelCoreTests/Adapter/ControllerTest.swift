@@ -176,26 +176,34 @@ final class ControllerTest: XCTestCase {
         let expectation = expectation(description: #function)
         let controller = NovelController()
 
-        expectation.expectedFulfillmentCount = 32
+        expectation.expectedFulfillmentCount = 36
 
-        let result = controller.load(raw: "s012345678901234567890123456789[tw]123[e]")
+        let result = controller.load(raw: "s012345678901234567890123456789[tw]abc[e]")
 
         switch result {
 
         case .valid(let script):
             controller.start(script: script)
+                      .delay(for: 0.1, scheduler: RunLoop.main)
                       .sink { event in
                           expectation.fulfill()
 
-                          if event == .character(char: "s") {
+                          switch event {
+                          case .character(let char) where char == "s":
                               controller.showTextUntilWaitTag()
+                          case .tapWait:
+                              controller.resume()
+                              break
+                          default:
+                              break
                           }
+
                       }
                       .store(in: &cancellables)
 
             waitForExpectations(timeout: 1)
 
-            XCTAssertEqual(controller.state, .pause)
+            XCTAssertEqual(controller.state, .loadWait)
         case .invalid:
             XCTFail()
         }
