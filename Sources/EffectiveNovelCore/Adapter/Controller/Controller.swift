@@ -64,7 +64,9 @@ public class NovelController: Controller {
             print("now state is not prepare. now state: \(state)")
         }
 
-        return internalOutputStream.eraseToAnyPublisher()
+        return internalOutputStream
+            .delay(for: 0.1, scheduler: RunLoop.main)
+            .eraseToAnyPublisher()
     }
 
     public func interrupt() {
@@ -119,10 +121,10 @@ public class NovelController: Controller {
 
         let checkListRange = displayEvents[offset..<displayEvents.count]
         let endIndex = checkListRange
-            .firstIndex(where: { $0 == .tapWaitAndNewline || $0 == .tapWait || $0 == .newline })
-            .map { $0 + index } ?? index
+            .firstIndex(where: { $0 == .tapWaitAndNewline || $0 == .tapWait })
+            .map { $0 - 1 } ?? (index - 3 < 0 ? index + 2 : (index - 3))
 
-        let events = displayEvents[(index + 1)...(endIndex - 3)]
+        let events = displayEvents[(index + 1)...endIndex]
 
         index += events.count
         events.forEach { internalOutputStream.send($0) }
