@@ -122,7 +122,7 @@ public class NovelController: Controller {
         let checkListRange = displayEvents[offset ..< displayEvents.count]
         let endIndex = checkListRange
             .firstIndex(where: { $0 == .tapWaitAndNewline || $0 == .tapWait || $0 == .end })
-            .map { $0 - 1 } ?? (index - 3 < 0 ? index + 2 : (index - 3))
+            .map { $0 - 1 }!
 
         let events = displayEvents[index...endIndex]
 
