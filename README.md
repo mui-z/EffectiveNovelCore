@@ -19,6 +19,8 @@ This only provides parse and output stream display event. (I'm going to link CLI
 Also, this lib is not optimized novel game.  
 Because this doesn't have if functioned, macro, subroutine.
 
+If you use it for such a purpose, please parse it each time on the application side to use it.
+
 ## Syntax
 Use tags to control how they are displayed.  
 This syntax is based on [Tyranoscript](https://tyrano.jp/).
