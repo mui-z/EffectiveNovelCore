@@ -104,7 +104,7 @@ controller.interrupt()
 
 ## Examples
 - [ ] CUI novel reader
-- [ ] iOS novel reader
+- [x] iOS novel reader
   - [EffectiveNovelReader](https://github.com/mui-z/EffectiveNovelReader)
 
 ## Todo
