@@ -34,6 +34,7 @@ Tags must be enclosed in `[]`.
 | tw                         | `.tapWait`                        | tap wait                                                                    |
 | twn                        | `.tapWaitAndNewline`              | tap wait and newline                                                        |
 | cl                         | `.clear`                          | clear                                                                       |
+| sleep duration=xxxx        | `.sleep(duration: Double)`        | sleep for the specified time. duration unit is milliseconds.                |
 | delay speed=xxxx           | `.delay(speed: Double)`           | change delay character displayed speed. speed unit is milliseconds.         |
 | setDefaultDelay speed=xxxx | `.setDefaultDelay(speed: Double)` | change default delay character displayed speed. speed unit is milliseconds. |
 | resetDelay                 | `.resetDelay`                     | reset delay speed                                                           |

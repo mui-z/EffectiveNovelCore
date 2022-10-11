@@ -21,5 +21,6 @@ public enum DisplayEvent: Equatable {
     case clear
     case resetDelay
     case delay(speed: Double)
+    case sleep(duration: Double)
     case end
 }

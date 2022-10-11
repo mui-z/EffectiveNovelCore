@@ -66,6 +66,9 @@ internal struct ScriptParser: Parser {
         case (let tag) where tag.hasPrefix("delay speed"):
             let speed = Double(tag.split(separator: "=").last!)!
             return .delay(speed: speed)
+        case (let tag) where tag.hasPrefix("sleep duration"):
+            let duration = Double(tag.split(separator: "=").last!)!
+            return .sleep(duration: duration)
         case "e":
             return .end
         default:
