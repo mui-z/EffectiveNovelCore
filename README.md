@@ -14,7 +14,7 @@ This is novel engine.
 This effectively helps to display the characters of the novel.　　
 
 This lib doesn't include UI layer.
-This only provides parse and output stream display event. (I'm going to link CLI and iOS Example.)
+This only provides parse and output stream display event. (Example of use： [EffectiveNovelReader](https://github.com/mui-z/EffectiveNovelReader))
 
 Also, this lib is not optimized novel game.  
 Because this doesn't have if functioned, macro, subroutine.
