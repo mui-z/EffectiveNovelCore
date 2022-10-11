@@ -14,7 +14,5 @@ jobs:
       - name: Get swift version
         run: swift --version
       - uses: actions/checkout@v3
-      - name: Build
-        run: swift build | xcpretty
       - name: Run tests
         run: swift test | xcpretty
