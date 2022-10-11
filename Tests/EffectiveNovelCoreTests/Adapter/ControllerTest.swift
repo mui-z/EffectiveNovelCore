@@ -261,6 +261,5 @@ final class ControllerTest: XCTestCase {
         case .invalid:
             XCTFail()
         }
-
     }
 }

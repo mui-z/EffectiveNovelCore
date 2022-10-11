@@ -26,6 +26,7 @@ final class ScriptParserTests: XCTestCase {
         XCTAssertEqual(try! parser.parse(rawString: "[setDefaultDelay speed=1000][e]"), [.setDefaultDelay(speed: 1000), .end])
         XCTAssertEqual(try! parser.parse(rawString: "[delay speed=1000][e]"), [.delay(speed: 1000), .end])
         XCTAssertEqual(try! parser.parse(rawString: "[resetDelay][e]"), [.resetDelay, .end])
+        XCTAssertEqual(try! parser.parse(rawString: "[wait duration=200]"), [.wait(duration: 200)])
         XCTAssertEqual(try! parser.parse(rawString: "[e]"), [.end])
     }
 

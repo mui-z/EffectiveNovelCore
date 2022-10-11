@@ -119,7 +119,7 @@ public class NovelController: Controller {
 
         let offset: Int = index
 
-        let checkListRange = displayEvents[offset ..< displayEvents.count]
+        let checkListRange = displayEvents[offset..<displayEvents.count]
         let endIndex = checkListRange
             .firstIndex(where: { $0 == .tapWaitAndNewline || $0 == .tapWait || $0 == .end })
             .map { $0 - 1 }!
@@ -193,6 +193,8 @@ public class NovelController: Controller {
             state = .pause
         case .end:
             reset()
+        case .wait(let duration):
+            try! await Task.sleep(nanoseconds: UInt64(duration * Double(pow(10.0, 6))))
         default:
             break
         }
