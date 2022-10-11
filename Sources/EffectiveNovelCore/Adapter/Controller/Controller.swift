@@ -193,7 +193,7 @@ public class NovelController: Controller {
             state = .pause
         case .end:
             reset()
-        case .wait(let duration):
+        case .sleep(let duration):
             try! await Task.sleep(nanoseconds: UInt64(duration * Double(pow(10.0, 6))))
         default:
             break
