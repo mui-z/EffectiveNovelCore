@@ -66,15 +66,15 @@ let controller = NovelController()
 
 
 // 2. load raw novel text
-let result: Result<EFNovelScript, [ValidationError]> = controller.load(rawText: rawText)
+let result: ValidateResult<EFNovelScript, [ValidationError]> = controller.load(rawText: rawText)
 
 let novelScript: EFNovelScript
 
 switch result {
-case .success(let script):
+case .valid(let script):
     novelScript = script
-case .failure(let error):
-    print(error)
+case .invalid(let errors):
+    print(errors)
     // handle error.
 }
 
