@@ -230,6 +230,31 @@ final class ControllerTest: XCTestCase {
         }
     }
 
+    func testWait() {
+        let expectation = expectation(description: #function)
+        let controller = NovelController()
+
+        expectation.expectedFulfillmentCount = 4
+
+        let result = controller.load(raw: "s123[wait duration=2000]0123456789[e]")
+
+        switch result {
+        case .valid(let script):
+            controller.start(script: script)
+                      .sink { event in
+                          expectation.fulfill()
+                      }
+                      .store(in: &cancellables)
+
+            waitForExpectations(timeout: 1)
+
+            XCTAssertEqual(controller.state, .running)
+
+        case .invalid:
+            XCTFail()
+        }
+    }
+
     func testPause() {
         let expectation = expectation(description: #function)
         let controller = NovelController()
