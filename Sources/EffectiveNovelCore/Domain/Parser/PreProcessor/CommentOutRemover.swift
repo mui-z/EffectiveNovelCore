@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct CommentOutRemover: PreProcessor {
+internal struct CommentOutRemover: PreProcessor {
     func execute(rawAllString: String) -> String {
         let tmpReplaceHashChar = "!@@-!@?+@@"
 

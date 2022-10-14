@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct NewlineCharacterRemover: PreProcessor {
+internal struct NewlineCharacterRemover: PreProcessor {
     func execute(rawAllString: String) -> String {
         var str = rawAllString
         str.removeAll(where: { $0 == "\n"} )
