@@ -43,10 +43,10 @@ If you want to use `#`, write `\\#`
 | e                          | `.end`                            | stop script novel end point                                                 |
 
 
-### Example Novel Text
+### Example Novel Script
 
 ```sample.ens
-# Sample Text
+# Sample Script
 tap waiting and newline[twn]
 
 [cl] cleared text.
