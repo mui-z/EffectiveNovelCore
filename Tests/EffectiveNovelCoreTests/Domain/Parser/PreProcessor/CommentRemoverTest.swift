@@ -36,8 +36,6 @@ class CommentOutRemoverTest: XCTestCase {
 
                      normal
                      """
-        print(expect)
-        print(processor.execute(rawAllString: target))
         XCTAssertEqual(processor.execute(rawAllString: target), expect)
     }
 }

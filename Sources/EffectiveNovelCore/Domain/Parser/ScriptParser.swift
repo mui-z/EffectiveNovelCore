@@ -21,7 +21,8 @@ internal struct ScriptParser: Parser {
 
     private func preProcess(rawAllString: String) -> String {
         let preProcessors: [PreProcessor] = [
-            CommentOutRemover()
+            CommentOutRemover(),
+            NewlineCharacterRemover()
         ]
 
         var str = rawAllString
