@@ -22,6 +22,7 @@ class CommentOutRemoverTest: XCTestCase {
                      #
                      ##
                      normal
+                     aaa\\#bbb#ccc
                      """
 
         let expect = """
@@ -35,6 +36,7 @@ class CommentOutRemoverTest: XCTestCase {
 
 
                      normal
+                     aaa#bbb
                      """
         XCTAssertEqual(processor.execute(rawAllString: target), expect)
     }
