@@ -10,24 +10,31 @@ internal protocol Parser {
 
 internal struct ScriptParser: Parser {
     func parse(rawString raw: String) throws -> [DisplayEvent] {
-        var rawAllString = raw
-        rawAllString.removeAll(where: { $0 == "\n" })
+        let rawAllString = preProcess(rawAllString: raw)
 
         do {
-            let events = try rawAllString.components(separatedBy: "[")
-                                         .filter { !$0.isEmpty }
-                                         .map { (raw: $0, isTagInclude: $0.contains("]")) }
-                                         .map { $0.isTagInclude ? try splitTagIncludingText(raw: $0.raw) : stringToCharacter(string: $0.raw) }
-                                         .flatMap { $0 }
-
-            return events
+            return try parseToDisplayEvents(rawAllString: rawAllString)
         } catch {
             throw error
         }
     }
 
+    private func preProcess(rawAllString: String) -> String {
+        var str = rawAllString
+        let lines = str.split(separator: "\n").map { String($0) }
+
+    }
+
+    private func parseToDisplayEvents(rawAllString: String) throws -> [DisplayEvent] {
+        rawAllString.components(separatedBy: "[")
+                    .filter { !$0.isEmpty }
+                    .map { (raw: $0, isTagInclude: $0.contains("]")) }
+                    .map { $0.isTagInclude ? try splitTagIncludingText(raw: $0.raw) : stringToCharacter(string: $0.raw) }
+                    .flatMap { $0 }
+    }
 
     //  n] or n]text
+
     private func splitTagIncludingText(raw: String) throws -> [DisplayEvent] {
         var result: [DisplayEvent] = []
         let tagAndText = raw.components(separatedBy: "]")
