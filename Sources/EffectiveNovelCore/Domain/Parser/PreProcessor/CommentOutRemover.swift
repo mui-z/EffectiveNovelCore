@@ -4,12 +4,12 @@
 
 import Foundation
 
-struct CommentRemover: PreProcessor {
+struct CommentOutRemover: PreProcessor {
     func execute(rawAllString: String) -> String {
         let lines = rawAllString.split(separator: "\n").map { String($0) }
-        return lines.map {
-                 $0.contains("#") ? String($0.split(separator: "#").first!) : $0
-             }
-             .joined(separator: "\n")
+        let replacedCommentOnlyLinesToBlank = lines.map { $0.first == "#" ? "" : $0 }
+        return replacedCommentOnlyLinesToBlank
+            .map { $0.contains("#") ? String($0.split(separator: "#").first ?? " ") : String($0) }
+            .joined(separator: "\n")
     }
 }

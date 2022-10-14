@@ -21,7 +21,7 @@ internal struct ScriptParser: Parser {
 
     private func preProcess(rawAllString: String) -> String {
         let preProcessors: [PreProcessor] = [
-            CommentRemover()
+            CommentOutRemover()
         ]
 
         var str = rawAllString
@@ -33,7 +33,7 @@ internal struct ScriptParser: Parser {
     }
 
     private func parseToDisplayEvents(rawAllString: String) throws -> [DisplayEvent] {
-        rawAllString.components(separatedBy: "[")
+        try rawAllString.components(separatedBy: "[")
                     .filter { !$0.isEmpty }
                     .map { (raw: $0, isTagInclude: $0.contains("]")) }
                     .map { $0.isTagInclude ? try splitTagIncludingText(raw: $0.raw) : stringToCharacter(string: $0.raw) }
