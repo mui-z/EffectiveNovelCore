@@ -118,7 +118,7 @@ controller.interrupt()
 - [x] novel text validator
 - [x] rearchitecture
 - [ ] Swift-DocC
-- [ ] comment out syntax
+- [x] comment out syntax
 
 ## LICENSE
 EffectiveNovelCore is licensed under the MIT [License](LICENSE)
