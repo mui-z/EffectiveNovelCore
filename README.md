@@ -27,6 +27,7 @@ This syntax is based on [Tyranoscript](https://tyrano.jp/).
 
 ### Syntax Tags
 Tags must be enclosed in `[]`.
+Comment out is `#` literal.
 
 | tag                        | DisplayEvent                      | description                                                                 |
 |----------------------------|-----------------------------------|-----------------------------------------------------------------------------|
@@ -44,6 +45,7 @@ Tags must be enclosed in `[]`.
 ### Example Novel Text
 
 ```sample.ens
+# Sample Text
 tap waiting and newline[twn]
 
 [cl] cleared text.
