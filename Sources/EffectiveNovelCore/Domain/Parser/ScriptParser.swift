@@ -26,18 +26,19 @@ internal struct ScriptParser: Parser {
         }
     }
 
+
     //  n] or n]text
     private func splitTagIncludingText(raw: String) throws -> [DisplayEvent] {
         var result: [DisplayEvent] = []
-        let TagAndText = raw.components(separatedBy: "]")
+        let tagAndText = raw.components(separatedBy: "]")
 
         do {
-            try result.append(parseTag(rawTag: TagAndText.first!))
+            try result.append(parseTag(rawTag: tagAndText.first!))
         } catch {
             throw error
         }
 
-        if let text = TagAndText.last, !text.isEmpty {
+        if let text = tagAndText.last, !text.isEmpty {
             result += stringToCharacter(string: text)
         }
 
