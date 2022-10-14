@@ -27,7 +27,8 @@ This syntax is based on [Tyranoscript](https://tyrano.jp/).
 
 ### Syntax Tags
 Tags must be enclosed in `[]`.
-Comment out is `#` literal.
+When commenting out, put `#` at the beginning.  
+If you want to use `#`, escape it with `\\#`.
 
 | tag                        | DisplayEvent                      | description                                                                 |
 |----------------------------|-----------------------------------|-----------------------------------------------------------------------------|
