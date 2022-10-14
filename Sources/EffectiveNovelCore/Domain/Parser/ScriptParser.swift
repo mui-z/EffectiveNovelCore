@@ -20,9 +20,16 @@ internal struct ScriptParser: Parser {
     }
 
     private func preProcess(rawAllString: String) -> String {
-        var str = rawAllString
-        let lines = str.split(separator: "\n").map { String($0) }
+        let preProcessors: [PreProcessor] = [
+            CommentRemover()
+        ]
 
+        var str = rawAllString
+        preProcessors.forEach { processor in
+            str = processor.execute(rawAllString: str)
+        }
+
+        return str
     }
 
     private func parseToDisplayEvents(rawAllString: String) throws -> [DisplayEvent] {
