@@ -22,13 +22,13 @@ Because this doesn't have if functioned, macro, subroutine.
 If you use it for such a purpose, please parse it each time on the application side to use it.
 
 ## Syntax
-Use tags to control how they are displayed.  
+Use tags to control how they are displayed.
+
 This syntax is based on [Tyranoscript](https://tyrano.jp/).
 
 ### Syntax Tags
-Tags must be enclosed in `[]`.
-When commenting out, put `#` at the beginning.  
-If you want to use `#`, write `\\#`
+Tags must be enclosed in `[]`.　　　　
+When commenting out, put `#` at the beginning.　If you want to use `#`, write `\\#`
 
 | tag                        | DisplayEvent                      | description                                                                 |
 |----------------------------|-----------------------------------|-----------------------------------------------------------------------------|
