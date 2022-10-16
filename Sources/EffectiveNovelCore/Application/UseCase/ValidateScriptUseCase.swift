@@ -3,6 +3,7 @@
 //
 
 import Foundation
+import Factory
 
 public enum ValidateResult<SUCCESS, ERROR> {
     case valid(SUCCESS)
@@ -14,6 +15,13 @@ internal protocol ValidateScriptUseCase {
 }
 
 internal struct ValidateScriptUseCaseImpl: ValidateScriptUseCase {
+
+    @Injected(Container.lineSyntaxValidators)
+    var lineSyntaxValidators: [LineSyntaxValidator]
+
+    @Injected(Container.allStringSyntaxValidators)
+    var allStringSyntaxValidators: [AllStringSyntaxValidator]
+
     func validate(rawAllString: String) -> ValidateResult<EFNovelScript, [ValidationError]> {
 
         var validationResults = [Result<(), ValidationError>]()
@@ -41,11 +49,6 @@ internal struct ValidateScriptUseCaseImpl: ValidateScriptUseCase {
 
     private func lineSyntaxValidate(rawAllString: String) -> [Result<(), ValidationError>] {
 
-        let validators: [LineSyntaxValidator] = [
-            BracketsPairValidator(),
-            ParseToDisplayEventsValidator()
-        ]
-
         let lines: [String] = rawAllString.split(separator: "\n").map { String($0) }
 
         var validationResults = [Result<(), ValidationError>]()
@@ -53,18 +56,14 @@ internal struct ValidateScriptUseCaseImpl: ValidateScriptUseCase {
         for (index, line) in lines.enumerated() {
             // NOTE: to one origin
             let fixedIndex = index + 1
-            validationResults += validators.map { $0.validate(lineRawText: line, lineNo: fixedIndex) }
+            validationResults += lineSyntaxValidators.map { $0.validate(lineRawText: line, lineNo: fixedIndex) }
         }
 
         return validationResults
     }
 
     private func allStringSyntaxValidate(allString: String) -> [Result<(), ValidationError>] {
-        let validators: [AllStringSyntaxValidator] = [
-            MustContainsIncludeTagsValidator()
-        ]
-
-        return validators.map { $0.validate(allStringRawText: allString) }
+        allStringSyntaxValidators.map { $0.validate(allStringRawText: allString) }
     }
 
 }
