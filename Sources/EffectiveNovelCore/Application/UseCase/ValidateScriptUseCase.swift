@@ -22,6 +22,9 @@ internal struct ValidateScriptUseCaseImpl: ValidateScriptUseCase {
     @Injected(Container.allStringSyntaxValidators)
     var allStringSyntaxValidators: [AllStringSyntaxValidator]
 
+    @Injected(Container.scriptParser)
+    var parser: ScriptParser
+
     func validate(rawAllString: String) -> ValidateResult<EFNovelScript, [ValidationError]> {
 
         var validationResults = [Result<(), ValidationError>]()
@@ -33,7 +36,7 @@ internal struct ValidateScriptUseCaseImpl: ValidateScriptUseCase {
             .allSatisfy { $0.isSuccess }
 
         if isSuccess {
-            let displayEvents = try! ScriptParser().parse(rawString: rawAllString)
+            let displayEvents = try! parser.parse(rawString: rawAllString)
             return .valid(EFNovelScript(events: displayEvents))
         } else {
             var errors = [ValidationError]()

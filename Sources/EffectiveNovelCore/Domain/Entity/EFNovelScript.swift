@@ -3,8 +3,12 @@
 //
 
 import Foundation
+import Factory
 
-public struct EFNovelScript: Equatable {
+public struct EFNovelScript {
+    @Injected(Container.scriptParser)
+    var parser: ScriptParser
+
     private(set) var displayEvents: [DisplayEvent] = []
 
     internal init(events: [DisplayEvent]) {
@@ -13,7 +17,6 @@ public struct EFNovelScript: Equatable {
 
     // NOTE: For Testable
     internal init(rawText: String) {
-        let parser = ScriptParser()
         displayEvents = try! parser.parse(rawString: rawText)
     }
 }

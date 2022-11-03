@@ -3,10 +3,12 @@
 //
 
 import Foundation
+import Factory
 
 internal struct ParseToDisplayEventsValidator: LineSyntaxValidator {
     func validate(lineRawText: String, lineNo: Int) -> Result<(), ValidationError> {
-        let parser = ScriptParser()
+        @Injected(Container.scriptParser)
+        var parser: ScriptParser
 
         do {
             _ = try parser.parse(rawString: lineRawText)

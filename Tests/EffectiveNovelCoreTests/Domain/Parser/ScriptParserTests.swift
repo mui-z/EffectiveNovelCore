@@ -1,10 +1,12 @@
 import XCTest
+import Factory
 @testable import EffectiveNovelCore
 
 final class ScriptParserTests: XCTestCase {
 
     func testParseText() {
-        let parser = ScriptParser()
+        @Injected(Container.scriptParser)
+        var parser: ScriptParser
 
         XCTAssertEqual(try! parser.parse(rawString: "ab[e]"), [.character(char: "a"), .character(char: "b"), .end])
 
@@ -17,7 +19,8 @@ final class ScriptParserTests: XCTestCase {
     }
 
     func testParseAllCommands() {
-        let parser = ScriptParser()
+        @Injected(Container.scriptParser)
+        var parser: ScriptParser
 
         XCTAssertEqual(try! parser.parse(rawString: "[n][e]"), [.newline, .end])
         XCTAssertEqual(try! parser.parse(rawString: "[tw][e]"), [.tapWait, .end])
@@ -31,7 +34,8 @@ final class ScriptParserTests: XCTestCase {
     }
 
     func testParseEvents() {
-        let parser = ScriptParser()
+        @Injected(Container.scriptParser)
+        var parser: ScriptParser
 
         XCTAssertEqual(try! parser.parse(rawString: "[cl][e]"), [.clear, .end])
         XCTAssertEqual(try! parser.parse(rawString: "[cl][n][e]"), [.clear, .newline, .end])
@@ -41,7 +45,8 @@ final class ScriptParserTests: XCTestCase {
     }
 
     func testContainValueEvent() {
-        let parser = ScriptParser()
+        @Injected(Container.scriptParser)
+        var parser: ScriptParser
 
         XCTAssertEqual(try! parser.parse(rawString: "[delay speed=1000][e]"), [.delay(speed: 1000), .end])
         XCTAssertEqual(try! parser.parse(rawString: "[delay speed=1000][delay speed=2000][e]"), [.delay(speed: 1000), .delay(speed: 2000), .end])
