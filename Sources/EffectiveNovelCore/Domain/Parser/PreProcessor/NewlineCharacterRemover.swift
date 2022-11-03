@@ -6,6 +6,6 @@ import Foundation
 
 internal struct NewlineCharacterRemover: PreProcessor {
     func execute(rawAllString: String) -> String {
-        return rawAllString.replacingOccurrences(of: "\n", with: "")
+        rawAllString.replacingOccurrences(of: "\n", with: "")
     }
 }
