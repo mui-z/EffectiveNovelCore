@@ -3,6 +3,7 @@
 //
 
 import Foundation
+import Factory
 
 internal protocol ScriptParser {
     func parse(rawString: String) throws -> [DisplayEvent]
@@ -20,10 +21,8 @@ internal struct ScriptParserImpl: ScriptParser {
     }
 
     private func preProcess(rawAllString: String) -> String {
-        let preProcessors: [PreProcessor] = [
-            CommentOutRemover(),
-            NewlineCharacterRemover()
-        ]
+        @Injected(Container.preProcessors)
+        var preProcessors: [PreProcessor]
 
         return preProcessors.reduce(rawAllString) { $1.execute(rawAllString: $0) }
     }
