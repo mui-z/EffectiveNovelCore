@@ -10,11 +10,11 @@ public enum ValidateResult<SUCCESS, ERROR> {
     case invalid(ERROR)
 }
 
-internal protocol ValidateScriptUseCase {
+protocol ValidateScriptUseCase {
     func validate(rawAllString: String) -> ValidateResult<EFNovelScript, [ValidationError]>
 }
 
-internal struct ValidateScriptUseCaseImpl: ValidateScriptUseCase {
+struct ValidateScriptUseCaseImpl: ValidateScriptUseCase {
 
     @Injected(Container.lineSyntaxValidators)
     var lineSyntaxValidators: [LineSyntaxValidator]

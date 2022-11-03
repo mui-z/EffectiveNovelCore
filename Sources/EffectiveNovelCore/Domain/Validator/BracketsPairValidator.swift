@@ -4,7 +4,7 @@
 
 import Foundation
 
-internal struct BracketsPairValidator: LineSyntaxValidator {
+struct BracketsPairValidator: LineSyntaxValidator {
     func validate(lineRawText: String, lineNo: Int) -> Result<(), ValidationError> {
 
         var frontBracketsCount = 0

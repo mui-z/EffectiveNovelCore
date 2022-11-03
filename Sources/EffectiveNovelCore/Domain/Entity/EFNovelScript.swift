@@ -11,12 +11,12 @@ public struct EFNovelScript {
 
     private(set) var displayEvents: [DisplayEvent] = []
 
-    internal init(events: [DisplayEvent]) {
+    init(events: [DisplayEvent]) {
         displayEvents = events
     }
 
     // NOTE: For Testable
-    internal init(rawText: String) {
+    init(rawText: String) {
         displayEvents = try! parser.parse(rawString: rawText)
     }
 }

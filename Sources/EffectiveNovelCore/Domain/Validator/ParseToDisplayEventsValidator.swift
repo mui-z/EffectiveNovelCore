@@ -5,7 +5,7 @@
 import Foundation
 import Factory
 
-internal struct ParseToDisplayEventsValidator: LineSyntaxValidator {
+struct ParseToDisplayEventsValidator: LineSyntaxValidator {
     func validate(lineRawText: String, lineNo: Int) -> Result<(), ValidationError> {
         @Injected(Container.scriptParser)
         var parser: ScriptParser

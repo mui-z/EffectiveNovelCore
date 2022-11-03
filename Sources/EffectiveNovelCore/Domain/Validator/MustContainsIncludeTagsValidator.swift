@@ -4,7 +4,7 @@
 
 import Foundation
 
-internal struct MustContainsIncludeTagsValidator: AllStringSyntaxValidator {
+struct MustContainsIncludeTagsValidator: AllStringSyntaxValidator {
     func validate(allStringRawText: String) -> Result<(), ValidationError> {
         var notFoundTags = [DisplayEvent]()
 

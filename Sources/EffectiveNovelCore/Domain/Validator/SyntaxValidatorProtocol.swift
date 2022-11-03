@@ -4,10 +4,10 @@
 
 import Foundation
 
-internal protocol AllStringSyntaxValidator {
+protocol AllStringSyntaxValidator {
     func validate(allStringRawText: String) -> Result<Void, ValidationError>
 }
 
-internal protocol LineSyntaxValidator {
+protocol LineSyntaxValidator {
     func validate(lineRawText: String, lineNo: Int) -> Result<Void, ValidationError>
 }

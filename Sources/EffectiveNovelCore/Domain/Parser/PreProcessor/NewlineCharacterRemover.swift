@@ -4,7 +4,7 @@
 
 import Foundation
 
-internal struct NewlineCharacterRemover: PreProcessor {
+struct NewlineCharacterRemover: PreProcessor {
     func execute(rawAllString: String) -> String {
         rawAllString.replacingOccurrences(of: "\n", with: "")
     }
