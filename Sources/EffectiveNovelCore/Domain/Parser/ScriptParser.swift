@@ -25,12 +25,7 @@ internal struct ScriptParser: Parser {
             NewlineCharacterRemover()
         ]
 
-        var str = rawAllString
-        preProcessors.forEach { processor in
-            str = processor.execute(rawAllString: str)
-        }
-
-        return str
+        return preProcessors.reduce(rawAllString) { $1.execute(rawAllString: $0) }
     }
 
     private func parseToDisplayEvents(rawAllString: String) throws -> [DisplayEvent] {
