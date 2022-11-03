@@ -182,7 +182,6 @@ final class ControllerTest: XCTestCase {
 
         case .valid(let script):
             controller.start(script: script)
-                      .print()
                       .sink { event in
                           expectation.fulfill()
 
