@@ -7,7 +7,7 @@ import Foundation
 protocol BracketsPairValidatorProtocol: LineSyntaxValidatorProtocol {}
 
 struct BracketsPairValidator: BracketsPairValidatorProtocol {
-    func validate(lineRawText: String, lineNo: Int) -> Result<(), ValidationError> {
+    func validate(lineRawText: String, lineNo: Int) -> Result<Void, ValidationError> {
 
         var frontBracketsCount = 0
         var rearBracketsCount = 0

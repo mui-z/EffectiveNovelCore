@@ -8,7 +8,7 @@ import Factory
 protocol ParseToDisplayEventsValidatorProtocol: LineSyntaxValidatorProtocol {}
 
 struct ParseToDisplayEventsValidator: ParseToDisplayEventsValidatorProtocol {
-    func validate(lineRawText: String, lineNo: Int) -> Result<(), ValidationError> {
+    func validate(lineRawText: String, lineNo: Int) -> Result<Void, ValidationError> {
         @Injected(Container.scriptParser)
         var parser: ScriptParserProtocol
 

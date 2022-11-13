@@ -27,7 +27,7 @@ struct ValidateScriptUseCase: ValidateScriptUseCaseProtocol {
 
     func validate(rawAllString: String) -> ValidateResult<EFNovelScript, [ValidationError]> {
 
-        var validationResults = [Result<(), ValidationError>]()
+        var validationResults = [Result<Void, ValidationError>]()
 
         validationResults += lineSyntaxValidate(rawAllString: rawAllString)
         validationResults += allStringSyntaxValidate(allString: rawAllString)
@@ -50,11 +50,11 @@ struct ValidateScriptUseCase: ValidateScriptUseCaseProtocol {
 
     }
 
-    private func lineSyntaxValidate(rawAllString: String) -> [Result<(), ValidationError>] {
+    private func lineSyntaxValidate(rawAllString: String) -> [Result<Void, ValidationError>] {
 
         let lines: [String] = rawAllString.split(separator: "\n").map { String($0) }
 
-        var validationResults = [Result<(), ValidationError>]()
+        var validationResults = [Result<Void, ValidationError>]()
 
         for (index, line) in lines.enumerated() {
             // NOTE: to one origin
@@ -65,7 +65,7 @@ struct ValidateScriptUseCase: ValidateScriptUseCaseProtocol {
         return validationResults
     }
 
-    private func allStringSyntaxValidate(allString: String) -> [Result<(), ValidationError>] {
+    private func allStringSyntaxValidate(allString: String) -> [Result<Void, ValidationError>] {
         allStringSyntaxValidators.map { $0.validate(allStringRawText: allString) }
     }
 

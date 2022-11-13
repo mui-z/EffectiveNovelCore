@@ -7,7 +7,7 @@ import Foundation
 protocol MustContainsIncludeTagsValidatorProtocol: AllStringSyntaxValidatorProtocol {}
 
 struct MustContainsIncludeTagsValidator:  MustContainsIncludeTagsValidatorProtocol {
-    func validate(allStringRawText: String) -> Result<(), ValidationError> {
+    func validate(allStringRawText: String) -> Result<Void, ValidationError> {
         var notFoundTags = [DisplayEvent]()
 
         if !(allStringRawText.contains("[e]")) {
