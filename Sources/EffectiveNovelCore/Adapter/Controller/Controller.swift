@@ -31,7 +31,7 @@ public class NovelController: Controller {
     }
 
     @Injected(Container.validateScriptUseCase)
-    var validateScriptUseCase: ValidateScriptUseCase
+    var validateScriptUseCase: ValidateScriptUseCaseProtocol
 
     private var internalOutputStream = PassthroughSubject<DisplayEvent, Never>()
 

@@ -6,5 +6,5 @@ import Foundation
 import Factory
 
 extension Container {
-    static var validateScriptUseCase = Factory { ValidateScriptUseCaseImpl() as ValidateScriptUseCase }
+    static var validateScriptUseCase = Factory<ValidateScriptUseCaseProtocol> { ValidateScriptUseCase() }
 }

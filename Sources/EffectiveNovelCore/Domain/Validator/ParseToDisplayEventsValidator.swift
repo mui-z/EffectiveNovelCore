@@ -5,10 +5,12 @@
 import Foundation
 import Factory
 
-struct ParseToDisplayEventsValidator: LineSyntaxValidator {
+protocol ParseToDisplayEventsValidatorProtocol: LineSyntaxValidatorProtocol {}
+
+struct ParseToDisplayEventsValidator: ParseToDisplayEventsValidatorProtocol {
     func validate(lineRawText: String, lineNo: Int) -> Result<(), ValidationError> {
         @Injected(Container.scriptParser)
-        var parser: ScriptParser
+        var parser: ScriptParserProtocol
 
         do {
             _ = try parser.parse(rawString: lineRawText)

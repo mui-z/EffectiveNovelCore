@@ -10,7 +10,7 @@ import XCTest
 final class ValidateScriptUseCaseTest: XCTestCase {
 
     func testValidateFail() {
-        let useCase: ValidateScriptUseCase = ValidateScriptUseCaseImpl()
+        let useCase: ValidateScriptUseCaseProtocol = ValidateScriptUseCase()
         let expect: [ValidationError] = [
             .unknownTag(lineNo: 2, tagName: "invalid_tag"),
             .invalidBracketsPair(lineNo: 3),
@@ -36,7 +36,7 @@ final class ValidateScriptUseCaseTest: XCTestCase {
     }
 
     func testValidateSuccess() {
-        let useCase: ValidateScriptUseCase = ValidateScriptUseCaseImpl()
+        let useCase: ValidateScriptUseCaseProtocol = ValidateScriptUseCase()
         let expect: [DisplayEvent] = [
             .character(char: "v"),
             .character(char: "a"),

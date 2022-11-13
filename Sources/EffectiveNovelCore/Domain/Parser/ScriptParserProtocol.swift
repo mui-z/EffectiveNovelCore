@@ -5,11 +5,11 @@
 import Foundation
 import Factory
 
-protocol ScriptParser {
+protocol ScriptParserProtocol {
     func parse(rawString: String) throws -> [DisplayEvent]
 }
 
-struct ScriptParserImpl: ScriptParser {
+struct ScriptParser: ScriptParserProtocol {
     func parse(rawString raw: String) throws -> [DisplayEvent] {
         let rawAllString = preProcess(rawAllString: raw)
 
