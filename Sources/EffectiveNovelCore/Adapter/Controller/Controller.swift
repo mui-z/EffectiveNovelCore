@@ -33,7 +33,7 @@ public class NovelController: Controller {
     @Injected(Container.validateScriptUseCase)
     var validateScriptUseCase: ValidateScriptUseCaseProtocol
 
-    private var internalOutputStream = PassthroughSubject<DisplayEvent, Never>()
+    private var privateOutputStream = PassthroughSubject<DisplayEvent, Never>()
 
     private var displayEvents: [DisplayEvent] = []
 
@@ -64,7 +64,7 @@ public class NovelController: Controller {
             print("now state is not prepare. now state: \(state)")
         }
 
-        return internalOutputStream
+        return privateOutputStream
             .delay(for: 0.1, scheduler: RunLoop.main)
             .eraseToAnyPublisher()
     }
@@ -129,7 +129,7 @@ public class NovelController: Controller {
             let events = displayEvents[index...endIndex]
 
             index += events.count
-            events.forEach { internalOutputStream.send($0) }
+            events.forEach { privateOutputStream.send($0) }
         }
 
     }
@@ -149,7 +149,7 @@ public class NovelController: Controller {
 
                     let event = displayEvents[index]
 
-                    internalOutputStream.send(event)
+                    privateOutputStream.send(event)
 
                     // handle for interrupted
                     if state == .loadWait {
