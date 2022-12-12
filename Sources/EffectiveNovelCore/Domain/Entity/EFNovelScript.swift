@@ -8,7 +8,7 @@ import Factory
 public struct EFNovelScript {
     private(set) var displayEvents: [DisplayEvent] = []
 
-    internal init(events: [DisplayEvent]) {
+    init(events: [DisplayEvent]) {
         displayEvents = events
     }
 }
