@@ -38,7 +38,7 @@ final class ControllerTest: XCTestCase {
         switch result {
         case .valid(let script):
             controller.start(script: script)
-                      .sink { event in
+                      .sink { _ in
                           expectation.fulfill()
                       }
                       .store(in: &cancellables)
@@ -95,7 +95,7 @@ final class ControllerTest: XCTestCase {
         switch result {
         case .valid(let script):
             controller.start(script: script)
-                      .sink { event in
+                      .sink { _ in
                           expectation.fulfill()
                           controller.interrupt()
                       }
@@ -215,7 +215,7 @@ final class ControllerTest: XCTestCase {
         switch result {
         case .valid(let script):
             controller.start(script: script)
-                      .sink { event in
+                      .sink { _ in
                           expectation.fulfill()
                       }
                       .store(in: &cancellables)
@@ -240,7 +240,7 @@ final class ControllerTest: XCTestCase {
         switch result {
         case .valid(let script):
             controller.start(script: script)
-                      .sink { event in
+                      .sink { _ in
                           expectation.fulfill()
                       }
                       .store(in: &cancellables)
@@ -275,7 +275,6 @@ final class ControllerTest: XCTestCase {
                           }
                       }
                       .store(in: &cancellables)
-
 
             XCTAssertEqual(controller.state, .running)
 

@@ -119,7 +119,7 @@ public class NovelController: Controller {
 
         let offset: Int = index
 
-        let checkListRange = displayEvents[offset..<displayEvents.count]
+        let checkListRange = displayEvents[offset ..< displayEvents.count]
         let endIndex = checkListRange
             .firstIndex(where: { $0 == .tapWaitAndNewline || $0 == .tapWait || $0 == .end })
             .map { $0 - 1 }!
@@ -139,7 +139,7 @@ public class NovelController: Controller {
             // NOTE: wait for preparing subscribe stream client.
             try! await Task.sleep(nanoseconds: 100000)
 
-            while (true) {
+            while true {
                 switch state {
                 case .running:
                     if displayEvents.isEmpty {
@@ -180,7 +180,7 @@ public class NovelController: Controller {
 
     private func handleEvent(event: DisplayEvent) async {
         switch event {
-        case .character(_):
+        case .character:
             try! await Task.sleep(nanoseconds: UInt64(speed * Double(pow(10.0, 6))))
         case .delay(let duration):
             speed = duration

@@ -23,8 +23,8 @@ class BracketsPairValidatorTest: XCTestCase {
         let expect = ValidationError.invalidBracketsPair(lineNo: 100)
         let validator = BracketsPairValidator()
 
-        switch validator.validate(lineRawText: rawText, lineNo: 100){
-        case .success(_):
+        switch validator.validate(lineRawText: rawText, lineNo: 100) {
+        case .success:
             XCTFail()
         case .failure(let error):
             XCTAssertEqual(expect, error)
@@ -36,8 +36,8 @@ class BracketsPairValidatorTest: XCTestCase {
         let expect = ValidationError.invalidBracketsPair(lineNo: 100)
         let validator = BracketsPairValidator()
 
-        switch validator.validate(lineRawText: rawText, lineNo: 100){
-        case .success(_):
+        switch validator.validate(lineRawText: rawText, lineNo: 100) {
+        case .success:
             XCTFail()
         case .failure(let error):
             XCTAssertEqual(expect, error)
@@ -49,8 +49,8 @@ class BracketsPairValidatorTest: XCTestCase {
         let expect = ValidationError.invalidBracketsPair(lineNo: 100)
         let validator = BracketsPairValidator()
 
-        switch validator.validate(lineRawText: rawText, lineNo: 100){
-        case .success(_):
+        switch validator.validate(lineRawText: rawText, lineNo: 100) {
+        case .success:
             XCTFail()
         case .failure(let error):
             XCTAssertEqual(expect, error)

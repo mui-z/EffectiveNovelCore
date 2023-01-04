@@ -30,7 +30,7 @@ class CommentOutRemoverTest: XCTestCase {
 
                      aaa b
                      aaa
-                     aaa 
+                     aaa
                      bbb
                      ccc
 
