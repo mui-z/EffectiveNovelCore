@@ -21,6 +21,10 @@ Because this doesn't have if functioned, macro, subroutine.
 
 If you use it for such a purpose, please parse it each time on the application side to use it.
 
+
+## Demo
+demo: [EffectiveNovelReader](https://github.com/mui-z/EffectiveNovelReader)
+
 <img src=https://user-images.githubusercontent.com/93278577/199856220-e8560b14-5e93-431d-8afc-3fe454690d46.gif width=300 />
 
 ## Syntax
