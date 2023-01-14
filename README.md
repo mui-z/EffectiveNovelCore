@@ -21,6 +21,20 @@ Because this doesn't have if functioned, macro, subroutine.
 
 If you use it for such a purpose, please parse it each time on the application side to use it.
 
+```mermaid
+---
+title: Novel Core State Diagram
+---
+stateDiagram-v2
+    [*] --> loadWait
+    loadWait --> prepare: load
+    prepare --> running: start
+    running --> pause: pause
+    pause --> running: resume
+    running --> loadWait: interrupt
+    pause --> loadWait: interrupt
+```
+
 ## Syntax
 Use tags to control how they are displayed.
 
