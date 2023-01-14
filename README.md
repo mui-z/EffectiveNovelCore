@@ -21,16 +21,7 @@ Because this doesn't have if functioned, macro, subroutine.
 
 If you use it for such a purpose, please parse it each time on the application side to use it.
 
-```mermaid
-stateDiagram-v2
-    [*] --> loadWait
-    loadWait --> prepare: load
-    prepare --> running: start
-    running --> pause: pause
-    pause --> running: resume
-    running --> loadWait: interrupt
-    pause --> loadWait: interrupt
-```
+<img src=https://user-images.githubusercontent.com/93278577/199856220-e8560b14-5e93-431d-8afc-3fe454690d46.gif width=300 />
 
 ## Syntax
 Use tags to control how they are displayed.
@@ -119,6 +110,19 @@ controller.resume()
 controller.interrupt()
 
 
+```
+
+## State Figure
+
+```mermaid
+stateDiagram-v2
+    [*] --> loadWait
+    loadWait --> prepare: load
+    prepare --> running: start
+    running --> pause: pause
+    pause --> running: resume
+    running --> loadWait: interrupt
+    pause --> loadWait: interrupt
 ```
 
 ## Examples
