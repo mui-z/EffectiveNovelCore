@@ -70,6 +70,7 @@ end. [e]
 
 ```mermaid
 stateDiagram-v2
+    direction LR
     [*] --> loadWait
     loadWait --> prepare: load
     prepare --> running: start
