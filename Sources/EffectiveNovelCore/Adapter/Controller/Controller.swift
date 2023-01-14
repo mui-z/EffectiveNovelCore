@@ -32,7 +32,7 @@ public class NovelController: Controller {
     @Injected(Container.validateScriptUseCase)
     var validateScriptUseCase: ValidateScriptUseCaseProtocol
 	
-	private let semaphore = DispatchSemaphore(value: 1)
+    private let semaphore = DispatchSemaphore(value: 1)
 
     private var privateOutputStream = PassthroughSubject<DisplayEvent, Never>()
 
@@ -61,10 +61,10 @@ public class NovelController: Controller {
     }
 
     public func start(script: EFNovelScript) -> AnyPublisher<DisplayEvent, Never> {
-		defer {
-			semaphore.signal()
-		}
-		semaphore.wait()
+        defer {
+            semaphore.signal()
+        }
+        semaphore.wait()
 		
         switch state {
         case .prepare:
@@ -81,10 +81,10 @@ public class NovelController: Controller {
     }
 
     public func interrupt() {
-		defer {
-			semaphore.signal()
-		}
-		semaphore.wait()
+        defer {
+            semaphore.signal()
+        }
+        semaphore.wait()
 		
         switch state {
         case .running, .pause:
@@ -95,10 +95,10 @@ public class NovelController: Controller {
     }
 
     public func resume() {
-		defer {
-			semaphore.signal()
-		}
-		semaphore.wait()
+        defer {
+            semaphore.signal()
+        }
+        semaphore.wait()
 		
         switch state {
         case .pause:
@@ -109,10 +109,10 @@ public class NovelController: Controller {
     }
 
     public func resume(at resumeIndex: Int) {
-		defer {
-			semaphore.signal()
-		}
-		semaphore.wait()
+        defer {
+            semaphore.signal()
+        }
+        semaphore.wait()
 		
         switch state {
         case .pause:
@@ -124,10 +124,10 @@ public class NovelController: Controller {
     }
 
     public func pause() {
-		defer {
-			semaphore.signal()
-		}
-		semaphore.wait()
+        defer {
+            semaphore.signal()
+        }
+        semaphore.wait()
 		
         switch state {
         case .running:
@@ -138,10 +138,10 @@ public class NovelController: Controller {
     }
 
     public func showTextUntilWaitTag() {
-		defer {
-			semaphore.signal()
-		}
-		semaphore.wait()
+        defer {
+            semaphore.signal()
+        }
+        semaphore.wait()
 		
         guard state == .running else { return }
 
