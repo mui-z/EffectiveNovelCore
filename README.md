@@ -22,9 +22,6 @@ Because this doesn't have if functioned, macro, subroutine.
 If you use it for such a purpose, please parse it each time on the application side to use it.
 
 ```mermaid
----
-title: Novel Core State Diagram
----
 stateDiagram-v2
     [*] --> loadWait
     loadWait --> prepare: load
