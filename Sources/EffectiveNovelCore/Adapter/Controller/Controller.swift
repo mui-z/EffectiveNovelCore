@@ -16,7 +16,6 @@ protocol Controller {
     func interrupt()
     func resume()
     func resume(at resumeIndex: Int)
-    func reset()
     func pause()
     func showTextUntilWaitTag()
 
@@ -32,6 +31,8 @@ public class NovelController: Controller {
 
     @Injected(Container.validateScriptUseCase)
     var validateScriptUseCase: ValidateScriptUseCaseProtocol
+	
+    private let semaphore = DispatchSemaphore(value: 1)
 
     private var privateOutputStream = PassthroughSubject<DisplayEvent, Never>()
 
@@ -48,6 +49,11 @@ public class NovelController: Controller {
     private(set) var state = NovelState.loadWait
 
     public func load(raw: String) -> ValidateResult<EFNovelScript, [ValidationError]> {
+		defer {
+			semaphore.signal()
+		}
+		semaphore.wait()
+		
         state = .prepare
         index = 0
 
@@ -55,6 +61,11 @@ public class NovelController: Controller {
     }
 
     public func start(script: EFNovelScript) -> AnyPublisher<DisplayEvent, Never> {
+        defer {
+            semaphore.signal()
+        }
+        semaphore.wait()
+		
         switch state {
         case .prepare:
             displayEvents = script.displayEvents
@@ -70,6 +81,11 @@ public class NovelController: Controller {
     }
 
     public func interrupt() {
+        defer {
+            semaphore.signal()
+        }
+        semaphore.wait()
+		
         switch state {
         case .running, .pause:
             reset()
@@ -79,6 +95,11 @@ public class NovelController: Controller {
     }
 
     public func resume() {
+        defer {
+            semaphore.signal()
+        }
+        semaphore.wait()
+		
         switch state {
         case .pause:
             state = .running
@@ -88,6 +109,11 @@ public class NovelController: Controller {
     }
 
     public func resume(at resumeIndex: Int) {
+        defer {
+            semaphore.signal()
+        }
+        semaphore.wait()
+		
         switch state {
         case .pause:
             index = resumeIndex
@@ -97,15 +123,12 @@ public class NovelController: Controller {
         }
     }
 
-    public func reset() {
-        state = .loadWait
-        displayEvents = []
-        index = 0
-        defaultSpeed = systemDefaultSpeed
-        speed = systemDefaultSpeed
-    }
-
     public func pause() {
+        defer {
+            semaphore.signal()
+        }
+        semaphore.wait()
+		
         switch state {
         case .running:
             state = .pause
@@ -115,6 +138,11 @@ public class NovelController: Controller {
     }
 
     public func showTextUntilWaitTag() {
+        defer {
+            semaphore.signal()
+        }
+        semaphore.wait()
+		
         guard state == .running else { return }
 
         let offset: Int = index
@@ -133,6 +161,15 @@ public class NovelController: Controller {
         }
 
     }
+	
+    private func reset() {
+        state = .loadWait
+        displayEvents = []
+        index = 0
+        defaultSpeed = systemDefaultSpeed
+        speed = systemDefaultSpeed
+    }
+
 
     private func startLoop() {
         Task {
