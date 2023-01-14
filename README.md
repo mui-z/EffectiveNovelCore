@@ -66,6 +66,21 @@ end. [e]
 
 ## Usage
 
+### State Flow
+
+```mermaid
+stateDiagram-v2
+    [*] --> loadWait
+    loadWait --> prepare: load
+    prepare --> running: start
+    running --> pause: pause
+    pause --> running: resume
+    running --> loadWait: interrupt
+    pause --> loadWait: interrupt
+```
+
+### Sample Code
+
 ```swift
 
 // 1. get `NovelController` instance
@@ -110,19 +125,6 @@ controller.resume()
 controller.interrupt()
 
 
-```
-
-## State Figure
-
-```mermaid
-stateDiagram-v2
-    [*] --> loadWait
-    loadWait --> prepare: load
-    prepare --> running: start
-    running --> pause: pause
-    pause --> running: resume
-    running --> loadWait: interrupt
-    pause --> loadWait: interrupt
 ```
 
 ## Examples
