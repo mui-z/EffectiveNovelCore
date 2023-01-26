@@ -1,6 +1,7 @@
 ![workflow status](https://github.com/mui-z/effective-novel-core/actions/workflows/actions.yaml/badge.svg)
 [![License](https://img.shields.io/github/license/mui-z/GithubRepoSearcher?labelColor=333333)](https://github.com/mui-z/effective-novel-core/blob/main/LICENSE)
 [![Swift](https://img.shields.io/badge/Swift-FA7343)](https://github.com/apple/swift)
+![](https://img.shields.io/github/contributors/mui-z/EffectiveNovelCore)
 [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/mui_z_.svg?style=social&label=Follow%20%40mui-z)](https://twitter.com/mui_z_)
 
 
