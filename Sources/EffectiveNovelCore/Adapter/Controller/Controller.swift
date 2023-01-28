@@ -242,12 +242,12 @@ public class NovelController: Controller {
     private let systemDefaultSpeed: Double = 90
   
     private func getLatestSpeedFromIndex() -> Double {
-        let speedTagUntilIndex = displayEvents[0...index]
+        let latestDelayTagUntilIndex = displayEvents[0...index]
             .filter { isDipslayEvent($0) }
             .last
         
-        if let speedTagUntilIndex = speedTagUntilIndex {
-            switch speedTagUntilIndex {
+        if let tag = latestDelayTagUntilIndex {
+            switch tag {
                 case .delay(let speed):
                     return speed
                 default:
