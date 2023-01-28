@@ -102,6 +102,7 @@ public class NovelController: Controller {
 		
         switch state {
         case .pause:
+            speed = getLatestSpeedFromIndex()
             state = .running
         default:
             print("now state is not pause. now state: \(state)")
@@ -117,6 +118,7 @@ public class NovelController: Controller {
         switch state {
         case .pause:
             index = resumeIndex
+            speed = getLatestSpeedFromIndex()
             state = .running
         default:
             print("now state is not pause. now state: \(state)")
@@ -238,4 +240,31 @@ public class NovelController: Controller {
     }
 
     private let systemDefaultSpeed: Double = 90
+  
+    private func getLatestSpeedFromIndex() -> Double {
+        let speedTagUntilIndex = displayEvents[0...index]
+            .filter { isDipslayEvent($0) }
+            .last
+        
+        if let speedTagUntilIndex = speedTagUntilIndex {
+            switch speedTagUntilIndex {
+                case .delay(let speed):
+                    return speed
+                default:
+                    fatalError("unknown error.")
+            }
+        } else {
+            return defaultSpeed
+        }
+    }
+    
+    // FIXME: add equatable operator override. and move to domain.
+    private func isDipslayEvent(_ a: DisplayEvent) -> Bool {
+        switch a {
+            case .delay(_):
+                return true
+            default:
+                return false
+        }
+    }
 }
