@@ -152,7 +152,6 @@ public class NovelController: Controller {
             .firstIndex(where: { $0 == .tapWaitAndNewline || $0 == .tapWait || $0 == .end })
             .map { $0 - 1 }!
 
-        // TODO: use to semaphore
         if index <= endIndex {
             let events = displayEvents[index...endIndex]
 
