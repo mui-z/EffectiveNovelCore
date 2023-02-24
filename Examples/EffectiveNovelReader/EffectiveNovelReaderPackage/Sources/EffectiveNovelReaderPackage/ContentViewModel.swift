@@ -15,7 +15,7 @@ class ContentViewModel: ObservableObject {
 
     var cancellables = Set<AnyCancellable>()
 
-    var nowEvent: DisplayEvent? = nil
+    var nowEvent: DisplayEvent?
 
     init() {
         let result = controller.load(raw: novelText)

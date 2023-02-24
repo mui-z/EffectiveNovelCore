@@ -12,7 +12,7 @@ public struct ContentView: View {
 
     @StateObject
     var viewModel = ContentViewModel()
-    
+
     public var body: some View {
         GeometryReader { geometry in
             VStack {
