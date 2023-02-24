@@ -9,3 +9,4 @@ DerivedData/
 .netrc
 .idea/
 *.sn
+.swiftpm
