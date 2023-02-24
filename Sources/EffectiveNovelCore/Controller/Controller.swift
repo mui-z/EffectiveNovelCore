@@ -11,6 +11,7 @@ enum NovelState {
 }
 
 protocol Controller {
+    func validate(raw: String) -> ValidateResult<EFNovelScript, [ValidationError]>
     func load(raw: String) -> ValidateResult<EFNovelScript, [ValidationError]>
     func start(script: EFNovelScript) -> AnyPublisher<DisplayEvent, Never>
     func interrupt()
@@ -47,6 +48,10 @@ public class NovelController: Controller {
     private(set) lazy var speed: Double = systemDefaultSpeed
 
     private(set) var state = NovelState.loadWait
+    
+    public func validate(raw: String) -> ValidateResult<EFNovelScript, [ValidationError]> {
+        return validateScriptUseCase.validate(rawAllString: raw)
+    }
 
     public func load(raw: String) -> ValidateResult<EFNovelScript, [ValidationError]> {
 		defer {
