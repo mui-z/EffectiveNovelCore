@@ -54,9 +54,9 @@ public class NovelController: Controller {
     }
 
     public func load(raw: String) -> ValidateResult<EFNovelScript, [ValidationError]> {
-		defer {
-			semaphore.signal()
-		}
+        defer {
+            semaphore.signal()
+        }
 		semaphore.wait()
 
         state = .prepare
