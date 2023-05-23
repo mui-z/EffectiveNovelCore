@@ -16,13 +16,13 @@ protocol ValidateScriptUseCaseProtocol {
 
 struct ValidateScriptUseCase: ValidateScriptUseCaseProtocol {
   
-  @Injected(Container.lineSyntaxValidators)
+  @Injected(\.lineSyntaxValidators)
   var lineSyntaxValidators: [LineSyntaxValidatorProtocol]
   
-  @Injected(Container.allStringSyntaxValidators)
+  @Injected(\.allStringSyntaxValidators)
   var allStringSyntaxValidators: [AllStringSyntaxValidatorProtocol]
   
-  @Injected(Container.scriptParser)
+  @Injected(\.scriptParser)
   var parser: ScriptParserProtocol
   
   func validate(rawAllString: String) -> ValidateResult<EFNovelScript, [ValidationError]> {

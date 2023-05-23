@@ -8,21 +8,21 @@ import Factory
 // MARK: - Parser
 
 extension Container {
-  static var commentOutRemover = Factory<CommentOutRemoverProtocol> { CommentOutRemover() }
-  static var newLineRemover = Factory<NewlineCharacterRemoverProtocol> { NewlineCharacterRemover() }
+  var commentOutRemover: Factory<CommentOutRemoverProtocol> { self { CommentOutRemover() } }
+  var newLineRemover: Factory<NewlineCharacterRemoverProtocol> { self { NewlineCharacterRemover() } }
   
-  static var preProcessors = Factory<[PreProcessor]> { [CommentOutRemover(), NewlineCharacterRemover()] }
+  var preProcessors: Factory<[PreProcessor]> { self { [CommentOutRemover(), NewlineCharacterRemover()] } }
   
-  static var scriptParser = Factory<ScriptParserProtocol> { ScriptParser() }
+  var scriptParser: Factory<ScriptParserProtocol> { self { ScriptParser() } }
 }
 
 // MARK: - Validator
 
 extension Container {
-  static var bracketsPairValidator = Factory<BracketsPairValidatorProtocol> { BracketsPairValidator() }
-  static var mustContainsIncludeTagsValidator = Factory<MustContainsIncludeTagsValidatorProtocol> { MustContainsIncludeTagsValidator() }
-  static var parseToDisplayEventsValidator = Factory<ParseToDisplayEventsValidatorProtocol> { ParseToDisplayEventsValidator() }
-  
-  static var lineSyntaxValidators = Factory<[LineSyntaxValidatorProtocol]> { [BracketsPairValidator(), ParseToDisplayEventsValidator()] }
-  static var allStringSyntaxValidators = Factory<[AllStringSyntaxValidatorProtocol]> { [MustContainsIncludeTagsValidator()] }
+  var bracketsPairValidator: Factory<BracketsPairValidatorProtocol> { self { BracketsPairValidator() } }
+  var mustContainsIncludeTagsValidator: Factory<MustContainsIncludeTagsValidatorProtocol> { self { MustContainsIncludeTagsValidator() } }
+  var parseToDisplayEventsValidator: Factory<ParseToDisplayEventsValidatorProtocol> { self { ParseToDisplayEventsValidator() } }
+
+  var lineSyntaxValidators: Factory<[LineSyntaxValidatorProtocol]> { self { [BracketsPairValidator(), ParseToDisplayEventsValidator()] } }
+  var allStringSyntaxValidators: Factory<[AllStringSyntaxValidatorProtocol]> { self { [MustContainsIncludeTagsValidator()] } }
 }

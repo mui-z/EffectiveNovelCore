@@ -5,7 +5,7 @@ import Factory
 final class ScriptParserTests: XCTestCase {
   
   func testParseText() {
-    @Injected(Container.scriptParser)
+    @Injected(\.scriptParser)
     var parser: ScriptParserProtocol
     
     XCTAssertEqual(try! parser.parse(rawString: "ab[e]"), [.character(char: "a"), .character(char: "b"), .end])
@@ -19,7 +19,7 @@ final class ScriptParserTests: XCTestCase {
   }
   
   func testParseAllCommands() {
-    @Injected(Container.scriptParser)
+    @Injected(\.scriptParser)
     var parser: ScriptParserProtocol
     
     XCTAssertEqual(try! parser.parse(rawString: "[n][e]"), [.newline, .end])
@@ -34,7 +34,7 @@ final class ScriptParserTests: XCTestCase {
   }
   
   func testParseEvents() {
-    @Injected(Container.scriptParser)
+    @Injected(\.scriptParser)
     var parser: ScriptParserProtocol
     
     XCTAssertEqual(try! parser.parse(rawString: "[cl][e]"), [.clear, .end])
@@ -45,7 +45,7 @@ final class ScriptParserTests: XCTestCase {
   }
   
   func testContainValueEvent() {
-    @Injected(Container.scriptParser)
+    @Injected(\.scriptParser)
     var parser: ScriptParserProtocol
     
     XCTAssertEqual(try! parser.parse(rawString: "[delay speed=1000][e]"), [.delay(speed: 1000), .end])
