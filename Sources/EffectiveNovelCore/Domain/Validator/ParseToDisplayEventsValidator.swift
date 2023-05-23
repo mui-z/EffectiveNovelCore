@@ -9,7 +9,7 @@ protocol ParseToDisplayEventsValidatorProtocol: LineSyntaxValidatorProtocol {}
 
 struct ParseToDisplayEventsValidator: ParseToDisplayEventsValidatorProtocol {
   func validate(lineRawText: String, lineNo: Int) -> Result<Void, ValidationError> {
-    @Injected(Container.scriptParser)
+    @Injected(\.scriptParser)
     var parser: ScriptParserProtocol
     
     do {

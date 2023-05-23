@@ -30,7 +30,7 @@ public class NovelController: Controller {
   public init() {
   }
   
-  @Injected(Container.validateScriptUseCase)
+  @Injected(\.validateScriptUseCase)
   var validateScriptUseCase: ValidateScriptUseCaseProtocol
   
   private let semaphore = DispatchSemaphore(value: 1)

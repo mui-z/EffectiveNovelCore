@@ -21,7 +21,7 @@ struct ScriptParser: ScriptParserProtocol {
   }
   
   private func preProcess(rawAllString: String) -> String {
-    @Injected(Container.preProcessors)
+    @Injected(\.preProcessors)
     var preProcessors: [PreProcessor]
     
     return preProcessors.reduce(rawAllString) { $1.execute(rawAllString: $0) }
