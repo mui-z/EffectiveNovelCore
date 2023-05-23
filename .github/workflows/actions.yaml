@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: swift-actions/setup-swift@v1
         with:
-          swift-version: "5.7.0"
+          swift-version: "5.8.0"
       - name: Get swift version
         run: swift --version
       - uses: actions/checkout@v3
