@@ -5,5 +5,5 @@
 import Foundation
 
 protocol PreProcessor {
-    func execute(rawAllString: String) -> String
+  func execute(rawAllString: String) -> String
 }
