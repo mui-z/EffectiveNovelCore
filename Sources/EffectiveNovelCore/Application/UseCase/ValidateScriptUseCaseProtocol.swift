@@ -73,7 +73,12 @@ struct ValidateScriptUseCase: ValidateScriptUseCaseProtocol {
 
 private extension Result {
   var isSuccess: Bool {
-    if case .success = self { return true } else { return false }
+    // FIXME: very redundant code
+    if case .success = self {
+      return true
+    } else {
+      return false
+    }
   }
   
   var isError: Bool {
