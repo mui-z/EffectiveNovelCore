@@ -78,6 +78,7 @@ stateDiagram-v2
     [*] --> loadWait
     loadWait --> prepare: load
     prepare --> running: start
+    running --> loadWait: finish
     running --> pause: pause
     pause --> running: resume
     running --> loadWait: interrupt
