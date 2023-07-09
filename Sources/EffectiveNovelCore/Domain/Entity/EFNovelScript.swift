@@ -7,8 +7,4 @@ import Factory
 
 public struct EFNovelScript {
   private(set) var displayEvents: [DisplayEvent] = []
-  
-  init(events: [DisplayEvent]) {
-    displayEvents = events
-  }
 }

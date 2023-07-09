@@ -37,7 +37,7 @@ struct ValidateScriptUseCase: ValidateScriptUseCaseProtocol {
     
     if isSuccess {
       let displayEvents = try! parser.parse(rawString: rawAllString)
-      return .valid(EFNovelScript(events: displayEvents))
+      return .valid(.init(displayEvents: displayEvents))
     } else {
       var errors = [ValidationError]()
       validationResults.forEach { result in
