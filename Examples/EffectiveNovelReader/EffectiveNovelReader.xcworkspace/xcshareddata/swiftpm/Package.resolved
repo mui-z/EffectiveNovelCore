@@ -1,12 +1,21 @@
 {
   "pins" : [
     {
+      "identity" : "effectivenovelcore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mui-z/EffectiveNovelCore",
+      "state" : {
+        "revision" : "8052dcc04bf552d4c065900f13058e2eced9aa72",
+        "version" : "1.2.1"
+      }
+    },
+    {
       "identity" : "factory",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hmlongco/Factory",
       "state" : {
-        "revision" : "ca5788b8621b185a0fbe6ef05bb9a73b3ef2833f",
-        "version" : "1.2.9"
+        "revision" : "bf4e0ab7cfc45a921856d9ca196d834b7abf15a0",
+        "version" : "2.1.5"
       }
     }
   ],

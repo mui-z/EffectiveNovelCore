@@ -25,27 +25,27 @@ protocol Controller {
   var state: NovelState { get }
 }
 
+// MARK: parameter and public functions
 public class NovelController: Controller {
   
-  public init() {
-  }
+  private(set) var index = 0
+  
+  private(set) var state = NovelState.loadWait
+  
+  private let systemDefaultSpeed = 90.0
+  
+  private(set) lazy var defaultSpeed = systemDefaultSpeed
+  
+  private(set) lazy var speed = systemDefaultSpeed
   
   @Injected(\.validateScriptUseCase)
-  var validateScriptUseCase: ValidateScriptUseCaseProtocol
+  private var validateScriptUseCase: ValidateScriptUseCaseProtocol
   
-  private var privateOutputStream = PassthroughSubject<DisplayEvent, Never>()
+  private let privateOutputStream = PassthroughSubject<DisplayEvent, Never>()
   
   private var displayEvents: [DisplayEvent] = []
   
   private var cancellable: Set<AnyCancellable> = []
-  
-  private(set) var index: Int = 0
-  
-  private(set) lazy var defaultSpeed: Double = systemDefaultSpeed
-  
-  private(set) lazy var speed: Double = systemDefaultSpeed
-  
-  private(set) var state = NovelState.loadWait
   
   public func validate(raw: String) -> ValidateResult<EFNovelScript, [ValidationError]> {
     return validateScriptUseCase.validate(rawAllString: raw)
@@ -126,9 +126,11 @@ public class NovelController: Controller {
       index += events.count
       events.forEach { privateOutputStream.send($0) }
     }
-    
   }
-  
+}
+
+// MARK: private event handle logics
+extension NovelController {
   private func reset() {
     state = .loadWait
     displayEvents = []
@@ -202,6 +204,4 @@ public class NovelController: Controller {
         break
     }
   }
-  
-  private let systemDefaultSpeed: Double = 90
 }
