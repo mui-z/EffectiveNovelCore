@@ -90,7 +90,7 @@ stateDiagram-v2
 ```swift
 
 // 1. get `NovelController` instance
-let controller = NovelController()
+let controller = EFNovelController()
 
 
 // 2. load raw novel text
