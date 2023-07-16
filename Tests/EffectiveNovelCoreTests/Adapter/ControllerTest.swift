@@ -16,7 +16,7 @@ final class ControllerTest: XCTestCase {
   }
   
   func testLoad() {
-    let controller = NovelController()
+    let controller = EFNovelController()
     
     switch controller.load(raw: "[delay speed=1]abc[e]") {
       case .valid:
@@ -29,7 +29,7 @@ final class ControllerTest: XCTestCase {
   
   func testStart() {
     let expectation = expectation(description: #function)
-    let controller = NovelController()
+    let controller = EFNovelController()
     
     expectation.expectedFulfillmentCount = 4
     
@@ -56,7 +56,7 @@ final class ControllerTest: XCTestCase {
   
   func testSetDefaultDelay() {
     let expectation = expectation(description: #function)
-    let controller = NovelController()
+    let controller = EFNovelController()
     
     expectation.expectedFulfillmentCount = 5
     let result = controller.load(raw: "[setDefaultDelay=123]abc[e]")
@@ -88,7 +88,7 @@ final class ControllerTest: XCTestCase {
   
   func testInterrupt() {
     let expectation = expectation(description: #function)
-    let controller = NovelController()
+    let controller = EFNovelController()
     
     let result = controller.load(raw: "abc[e]")
     
@@ -111,7 +111,7 @@ final class ControllerTest: XCTestCase {
   
   func testResume() {
     let expectation = expectation(description: #function)
-    let controller = NovelController()
+    let controller = EFNovelController()
     
     expectation.expectedFulfillmentCount = 4
     
@@ -142,7 +142,7 @@ final class ControllerTest: XCTestCase {
   
   func testResumeSetIndex() {
     let expectation = expectation(description: #function)
-    let controller = NovelController()
+    let controller = EFNovelController()
     
     expectation.expectedFulfillmentCount = 8
     
@@ -172,7 +172,7 @@ final class ControllerTest: XCTestCase {
   
   func testShowUntilWaitTag() {
     let expectation = expectation(description: #function)
-    let controller = NovelController()
+    let controller = EFNovelController()
     
     expectation.expectedFulfillmentCount = 37
     
@@ -206,7 +206,7 @@ final class ControllerTest: XCTestCase {
   
   func testDelay() {
     let expectation = expectation(description: #function)
-    let controller = NovelController()
+    let controller = EFNovelController()
     
     expectation.expectedFulfillmentCount = 43
     
@@ -231,7 +231,7 @@ final class ControllerTest: XCTestCase {
   
   func testSleep() {
     let expectation = expectation(description: #function)
-    let controller = NovelController()
+    let controller = EFNovelController()
     
     expectation.expectedFulfillmentCount = 4
     
@@ -256,7 +256,7 @@ final class ControllerTest: XCTestCase {
   
   func testPause() {
     let expectation = expectation(description: #function)
-    let controller = NovelController()
+    let controller = EFNovelController()
     
     expectation.expectedFulfillmentCount = 12
     

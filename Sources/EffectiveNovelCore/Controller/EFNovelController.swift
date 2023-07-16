@@ -10,7 +10,7 @@ enum NovelState {
   case loadWait, prepare, running, pause
 }
 
-protocol Controller {
+protocol EFNovelControllerProtocol {
   func validate(raw: String) -> ValidateResult<EFNovelScript, [ValidationError]>
   func load(raw: String) -> ValidateResult<EFNovelScript, [ValidationError]>
   func start(script: EFNovelScript) -> AnyPublisher<DisplayEvent, Never>
@@ -26,7 +26,7 @@ protocol Controller {
 }
 
 // MARK: parameter and public functions
-public class NovelController: Controller {
+public class EFNovelController: EFNovelControllerProtocol {
   
   private(set) var index = 0
   
@@ -130,7 +130,7 @@ public class NovelController: Controller {
 }
 
 // MARK: private event handle logics
-extension NovelController {
+extension EFNovelController {
   private func reset() {
     state = .loadWait
     displayEvents = []
