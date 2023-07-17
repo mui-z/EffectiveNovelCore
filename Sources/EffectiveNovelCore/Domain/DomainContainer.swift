@@ -8,11 +8,7 @@ import Factory
 // MARK: - Parser
 
 extension Container {
-  var commentOutRemover: Factory<CommentOutRemoverProtocol> { self { CommentOutRemover() } }
-  var newLineRemover: Factory<NewlineCharacterRemoverProtocol> { self { NewlineCharacterRemover() } }
-  
   var preProcessors: Factory<[PreProcessor]> { self { [CommentOutRemover(), NewlineCharacterRemover()] } }
-  
   var scriptParser: Factory<ScriptParserProtocol> { self { ScriptParser() } }
 }
 
