@@ -11,8 +11,8 @@ enum NovelState {
 }
 
 protocol EFNovelControllerProtocol {
-  func validate(raw: String) -> ValidateResult<EFNovelScript, [ValidationError]>
-  func load(raw: String) -> ValidateResult<EFNovelScript, [ValidationError]>
+  func validate(raw: String) -> ValidationResult<EFNovelScript, [ValidationError]>
+  func load(raw: String) -> ValidationResult<EFNovelScript, [ValidationError]>
   func start(script: EFNovelScript) -> AnyPublisher<DisplayEvent, Never>
   func interrupt()
   func resume()
@@ -47,11 +47,11 @@ public class EFNovelController: EFNovelControllerProtocol {
   
   private var cancellable: Set<AnyCancellable> = []
   
-  public func validate(raw: String) -> ValidateResult<EFNovelScript, [ValidationError]> {
+  public func validate(raw: String) -> ValidationResult<EFNovelScript, [ValidationError]> {
     return validateScriptUseCase.validate(rawAllString: raw)
   }
   
-  public func load(raw: String) -> ValidateResult<EFNovelScript, [ValidationError]> {
+  public func load(raw: String) -> ValidationResult<EFNovelScript, [ValidationError]> {
     state = .prepare
     index = 0
     

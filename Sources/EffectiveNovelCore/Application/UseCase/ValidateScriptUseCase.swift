@@ -5,13 +5,13 @@
 import Foundation
 import Factory
 
-public enum ValidateResult<SUCCESS, ERROR> {
+public enum ValidationResult<SUCCESS, ERROR> {
   case valid(SUCCESS)
   case invalid(ERROR)
 }
 
 protocol ValidateScriptUseCaseProtocol {
-  func validate(rawAllString: String) -> ValidateResult<EFNovelScript, [ValidationError]>
+  func validate(rawAllString: String) -> ValidationResult<EFNovelScript, [ValidationError]>
 }
 
 struct ValidateScriptUseCase: ValidateScriptUseCaseProtocol {
@@ -25,7 +25,7 @@ struct ValidateScriptUseCase: ValidateScriptUseCaseProtocol {
   @Injected(\.scriptParser)
   var parser: ScriptParserProtocol
   
-  func validate(rawAllString: String) -> ValidateResult<EFNovelScript, [ValidationError]> {
+  func validate(rawAllString: String) -> ValidationResult<EFNovelScript, [ValidationError]> {
     
     var validationResults = [Result<Void, ValidationError>]()
     
