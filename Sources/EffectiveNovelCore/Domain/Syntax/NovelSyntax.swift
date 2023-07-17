@@ -26,7 +26,7 @@ public enum DisplayEvent: Equatable {
 }
 
 extension DisplayEvent {
-  func rawTagString() -> String {
+  var raw: String {
     switch self {
       case .newline:
         return "n"

@@ -10,7 +10,7 @@ struct MustContainsIncludeTagsValidator: MustContainsIncludeTagsValidatorProtoco
   func validate(allStringRawText: String) -> Result<Void, ValidationError> {
     let mustContainsTags: [DisplayEvent] = [.end]
     let notFoundTags = mustContainsTags
-      .filter { !allStringRawText.contains("[\($0.rawTagString())]") }
+      .filter { !allStringRawText.contains("[\($0.raw)]") }
     
     return notFoundTags.isEmpty ? .success(()) : .failure(.notFoundMustIncludeTag(notFoundTags: notFoundTags))
   }
