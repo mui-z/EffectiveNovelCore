@@ -6,5 +6,5 @@ import Foundation
 import Factory
 
 public struct EFNovelScript {
-  private(set) var displayEvents: [DisplayEvent] = []
+  let displayEvents: [DisplayEvent]
 }
