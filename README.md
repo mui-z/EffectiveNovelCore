@@ -146,4 +146,4 @@ controller.interrupt()
 - [x] comment out syntax
 
 ## LICENSE
-EffectiveNovelCore is licensed under the MIT [License](LICENSE)
+EffectiveNovelCore is licensed under the [MIT License](LICENSE)
