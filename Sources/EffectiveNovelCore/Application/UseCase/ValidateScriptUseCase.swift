@@ -47,7 +47,6 @@ struct ValidateScriptUseCase: ValidateScriptUseCaseProtocol {
       }
       return .invalid(errors)
     }
-    
   }
   
   private func lineSyntaxValidate(rawAllString: String) -> [Result<Void, ValidationError>] {
@@ -68,7 +67,6 @@ struct ValidateScriptUseCase: ValidateScriptUseCaseProtocol {
   private func allStringSyntaxValidate(allString: String) -> [Result<Void, ValidationError>] {
     allStringSyntaxValidators.map { $0.validate(allStringRawText: allString) }
   }
-  
 }
 
 private extension Result {

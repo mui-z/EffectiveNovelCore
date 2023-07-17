@@ -10,4 +10,3 @@ import Foundation
 protocol AllStringSyntaxValidatorProtocol {
   func validate(allStringRawText: String) -> Result<Void, ValidationError>
 }
-

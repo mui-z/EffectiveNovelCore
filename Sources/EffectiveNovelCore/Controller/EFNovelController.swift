@@ -131,6 +131,7 @@ public class EFNovelController: EFNovelControllerProtocol {
 
 // MARK: private event handle logics
 extension EFNovelController {
+  
   private func reset() {
     state = .loadWait
     displayEvents = []

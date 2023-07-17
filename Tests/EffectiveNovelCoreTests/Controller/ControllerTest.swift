@@ -24,7 +24,6 @@ final class ControllerTest: XCTestCase {
       case .invalid:
         XCTFail()
     }
-    
   }
   
   func testStart() {
@@ -51,7 +50,6 @@ final class ControllerTest: XCTestCase {
       case .invalid:
         XCTFail()
     }
-    
   }
   
   func testSetDefaultDelay() {
@@ -167,7 +165,6 @@ final class ControllerTest: XCTestCase {
       case .invalid:
         XCTFail()
     }
-    
   }
   
   func testShowUntilWaitTag() {
