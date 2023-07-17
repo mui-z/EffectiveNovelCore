@@ -70,7 +70,7 @@ struct ScriptParser: ScriptParserProtocol {
         return .clear
       case "resetDelay":
         return .resetDelay
-      case (let tag) where tag.hasPrefix("setDefaultDelay"):
+      case (let tag) where tag.hasPrefix("setDefaultDelay speed"):
         let speed = Double(tag.split(separator: "=").last!)!
         return .setDefaultDelay(speed: speed)
       case (let tag) where tag.hasPrefix("delay speed"):

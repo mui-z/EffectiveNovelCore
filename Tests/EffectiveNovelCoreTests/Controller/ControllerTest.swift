@@ -59,7 +59,7 @@ final class ControllerTest: XCTestCase {
     let controller = EFNovelController()
     
     expectation.expectedFulfillmentCount = 5
-    let result = controller.load(raw: "[setDefaultDelay=123]abc[e]")
+    let result = controller.load(raw: "[setDefaultDelay speed=123]abc[e]")
     
     switch result {
       case .valid(let script):
