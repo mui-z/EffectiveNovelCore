@@ -65,7 +65,7 @@ public class EFNovelController: EFNovelControllerProtocol {
         state = .running
         startLoop()
       default:
-        print("current state is not prepare. current state: \(state)")
+        print("current state is not prepare. it is \(state)")
     }
     
     return privateOutputStream
@@ -78,7 +78,7 @@ public class EFNovelController: EFNovelControllerProtocol {
       case .running, .pause:
         reset()
       default:
-        print("current state is not running or pause. current state: \(state)")
+        print("current state is not running or pause. it is \(state)")
     }
   }
   
@@ -87,7 +87,7 @@ public class EFNovelController: EFNovelControllerProtocol {
       case .pause:
         state = .running
       default:
-        print("current state is not pause. current state: \(state)")
+        print("current state is not pause. it is \(state)")
     }
   }
   
@@ -97,7 +97,7 @@ public class EFNovelController: EFNovelControllerProtocol {
         index = resumeIndex
         state = .running
       default:
-        print("current state is not pause. current state: \(state)")
+        print("current state is not pause. it is \(state)")
     }
   }
   
@@ -106,7 +106,7 @@ public class EFNovelController: EFNovelControllerProtocol {
       case .running:
         state = .pause
       default:
-        print("current state is not running. current state: \(state)")
+        print("current state is not running. it is \(state)")
     }
   }
   
