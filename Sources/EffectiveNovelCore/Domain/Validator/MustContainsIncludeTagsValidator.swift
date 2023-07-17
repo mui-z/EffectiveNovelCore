@@ -8,11 +8,9 @@ protocol MustContainsIncludeTagsValidatorProtocol: AllStringSyntaxValidatorProto
 
 struct MustContainsIncludeTagsValidator: MustContainsIncludeTagsValidatorProtocol {
   func validate(allStringRawText: String) -> Result<Void, ValidationError> {
-    var notFoundTags = [DisplayEvent]()
-    
-    if !(allStringRawText.contains("[e]")) {
-      notFoundTags.append(.end)
-    }
+    let mustContainsTags: [DisplayEvent] = [.end]
+    let notFoundTags = mustContainsTags
+      .filter { !allStringRawText.contains("[\($0.rawTagString())]") }
     
     return notFoundTags.isEmpty ? .success(()) : .failure(.notFoundMustIncludeTag(notFoundTags: notFoundTags))
   }

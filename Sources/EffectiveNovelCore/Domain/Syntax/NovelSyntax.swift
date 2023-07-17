@@ -24,3 +24,30 @@ public enum DisplayEvent: Equatable {
   case sleep(duration: Double)
   case end
 }
+
+extension DisplayEvent {
+  func rawTagString() -> String {
+    switch self {
+      case .newline:
+        return "n"
+      case .tapWait:
+        return "tw"
+      case .tapWaitAndNewline:
+        return "twn"
+      case .clear:
+        return "cl"
+      case .resetDelay:
+        return "resetDelay"
+      case .setDefaultDelay:
+        return "setDefaultDelay"
+      case .delay:
+        return "delay"
+      case .sleep:
+        return "sleep"
+      case .end:
+        return "e"
+      case .character(char: let char):
+        return String(char)
+    }
+  }
+}
