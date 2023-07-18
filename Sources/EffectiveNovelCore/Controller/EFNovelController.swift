@@ -27,6 +27,7 @@ protocol EFNovelControllerProtocol {
 
 // MARK: parameter and public functions
 public class EFNovelController: EFNovelControllerProtocol {
+  public init() {}
   
   private(set) var index = 0
   
