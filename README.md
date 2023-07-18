@@ -89,7 +89,7 @@ stateDiagram-v2
 
 ```swift
 
-// 1. get `NovelController` instance
+// 1. get `EFNovelController` instance
 let controller = EFNovelController()
 
 
