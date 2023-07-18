@@ -11,7 +11,7 @@ class ContentViewModel: ObservableObject {
     @Published
     var displayText = "let's tap."
 
-    let controller = NovelController()
+    let controller = EFNovelController()
 
     var cancellables = Set<AnyCancellable>()
 
