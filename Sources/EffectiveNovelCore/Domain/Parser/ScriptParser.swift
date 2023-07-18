@@ -11,24 +11,24 @@ protocol ScriptParserProtocol {
 
 struct ScriptParser: ScriptParserProtocol {
   func parse(rawString raw: String) throws -> [DisplayEvent] {
-    let rawAllString = preProcess(rawAllString: raw)
+    let preProcessedString = preProcess(raw: raw)
     
     do {
-      return try parseToDisplayEvents(rawAllString: rawAllString)
+      return try parseToDisplayEvents(preProcessedString: preProcessedString)
     } catch {
       throw error
     }
   }
   
-  private func preProcess(rawAllString: String) -> String {
+  private func preProcess(raw: String) -> String {
     @Injected(\.preProcessors)
     var preProcessors: [PreProcessor]
     
-    return preProcessors.reduce(rawAllString) { $1.execute(rawAllString: $0) }
+    return preProcessors.reduce(raw) { $1.execute(rawAllString: $0) }
   }
   
-  private func parseToDisplayEvents(rawAllString: String) throws -> [DisplayEvent] {
-    try rawAllString.components(separatedBy: "[")
+  private func parseToDisplayEvents(preProcessedString: String) throws -> [DisplayEvent] {
+    try preProcessedString.components(separatedBy: "[")
       .filter { !$0.isEmpty }
       .map { (raw: $0, isTagInclude: $0.contains("]")) }
       .map { $0.isTagInclude ? try splitTagIncludingText(raw: $0.raw) : stringToCharacter(string: $0.raw) }
