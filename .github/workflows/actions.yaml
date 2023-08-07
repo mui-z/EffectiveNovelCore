@@ -2,9 +2,6 @@ name: package test
 
 on: [push]
 
-env:
-  CODEQL_ENABLE_EXPERIMENTAL_FEATURES_SWIFT: true
-
 permissions:
   actions: read
   contents: read
