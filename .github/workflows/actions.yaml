@@ -2,8 +2,11 @@ name: package test
 
 on: [push]
 
+env:
+  CODEQL_ENABLE_EXPERIMENTAL_FEATURES_SWIFT: true
+
 jobs:
-  build:
+  build-and-test:
 
     runs-on: macos-latest
 
@@ -11,10 +14,27 @@ jobs:
       - uses: swift-actions/setup-swift@v1
         with:
           swift-version: "5.8.0"
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: swift
+
       - name: Get swift version
         run: swift --version
+
       - uses: actions/checkout@v3
+
       - name: Build
         run: swift build | xcpretty
+
       - name: Run tests
         run: swift test | xcpretty
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+        with:
+          category: "/language:swift"
+
+
+>>>>>>> 4cf372e (add: add codeql codes)
