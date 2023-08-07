@@ -36,5 +36,3 @@ jobs:
         with:
           category: "/language:swift"
 
-
->>>>>>> 4cf372e (add: add codeql codes)
