@@ -2,7 +2,7 @@
 // Created by osushi on 2022/09/23.
 //
 
-public enum ValidationError: Error, Equatable {
+public enum ValidationError: Error, Equatable, Sendable {
   case unknownTag(lineNo: Int, tagName: String)
   case invalidBracketsPair(lineNo: Int)
   case notFoundMustIncludeTag(notFoundTags: [DisplayEvent])
@@ -12,7 +12,7 @@ enum TagParseError: Error, Equatable {
   case unknownTag(unknownTag: String)
 }
 
-public enum DisplayEvent: Equatable {
+public enum DisplayEvent: Equatable, Sendable {
   case character(char: Character)
   case setDefaultDelay(speed: Double)
   case newline

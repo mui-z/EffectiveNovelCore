@@ -5,6 +5,6 @@
 import Foundation
 import Factory
 
-public struct EFNovelScript {
+public struct EFNovelScript: Sendable {
   let displayEvents: [DisplayEvent]
 }

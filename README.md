@@ -1,6 +1,6 @@
 ![workflow status](https://github.com/mui-z/effective-novel-core/actions/workflows/actions.yaml/badge.svg)
 [![License](https://img.shields.io/github/license/mui-z/GithubRepoSearcher?labelColor=333333)](https://github.com/mui-z/effective-novel-core/blob/main/LICENSE)
-[![Swift](https://img.shields.io/badge/Swift-FA7343)](https://github.com/apple/swift)
+[![Swift](https://img.shields.io/badge/Swift-6-FA7343)](https://github.com/apple/swift)
 ![](https://img.shields.io/github/contributors/mui-z/EffectiveNovelCore)
 [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/mui_z_.svg?style=social&label=Follow%20%40mui-z)](https://twitter.com/mui_z_)
 
@@ -16,6 +16,14 @@ This effectively helps to display the characters of the novel.　　
 
 This library doesn't include UI layer.
 This only provides parse and output stream display event. (Example of use: [EffectiveNovelReader](https://github.com/mui-z/EffectiveNovelReader))
+
+Requires **Swift 6**. `EFNovelController` is `@MainActor`; create and call it from the main actor (typical for UI).
+
+### Architecture (Clean Architecture)
+
+- **Domain**: script entities (`EFNovelScript`, `DisplayEvent`), parsing, validation, and **pure playback rules** (`NovelState`, `NovelPlaybackState`, `NovelPlaybackReducer`).
+- **Application**: stateless use cases only — e.g. `ValidateScriptUseCase` (immutable collaborators via `init`, no long-lived mutable fields).
+- **Interface adapters**: `EFNovelController` + `NovelPlaybackSession` hold playback **runtime state** and the async loop; domain rules stay in `NovelPlaybackReducer`. Combine: `AnyPublisher<DisplayEvent, Never>`.
 
 Also, this lib is not optimized novel game, because this doesn't have if functioned, macro, subroutine.
 
@@ -88,13 +96,11 @@ stateDiagram-v2
 ### Sample Code
 
 ```swift
-
-// 1. get `EFNovelController` instance
+// 1. On the main actor, create `EFNovelController`.
 let controller = EFNovelController()
 
-
-// 2. load raw novel text
-let result: ValidateResult<EFNovelScript, [ValidationError]> = controller.load(rawText: rawText)
+// 2. Load raw novel text
+let result: ValidationResult<EFNovelScript, [ValidationError]> = controller.load(raw: rawText)
 
 let novelScript: EFNovelScript
 
@@ -106,37 +112,36 @@ case .invalid(let errors):
     // handle error.
 }
 
-// 3. start() and listening stream
+// 3. Start and listen to the stream
 controller.start(script: novelScript)
-          .sink { event in
-              switch event {
-              case .character(let char):
-                  displayCharacter(char)
-              // and any command handling
-              }
-          }
-          .store(in: &cancellables)
+    .sink { event in
+        switch event {
+        case .character(let char):
+            displayCharacter(char)
+        // handle other commands
+        default:
+            break
+        }
+    }
+    .store(in: &cancellables)
 
-// (4.) show text until wait tag
+// (4.) Show text until the next wait tag
 controller.showTextUntilWaitTag()
 
-// (5.) pause stream.
+// (5.) Pause stream
 controller.pause()
 
-// (6.) resume from pause
-// If you want to start from any index number, you can use `controller.resume(at: 100)`
-controller.resume() 
+// (6.) Resume (optionally `controller.resume(at: 100)`)
+controller.resume()
 
-// (7.) interrupt
+// (7.) Interrupt
 controller.interrupt()
-
-
 ```
 
 ## Examples
 - [ ] CUI novel reader
 - [x] iOS novel reader
-  - [EffectiveNovelReader](https://github.com/mui-z/EffectiveNovelReader)
+  - [EffectiveNovelReader](https://github.com/mui-z/EffectiveNovelReader) — bundled example under `Examples/` targets **iOS 17+** (`@Observable` / Observation)
 
 ## Todo
 - [ ] value input

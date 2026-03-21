@@ -10,8 +10,8 @@ import SwiftUI
 public struct ContentView: View {
     public init() {}
 
-    @StateObject
-    var viewModel = ContentViewModel()
+    @State
+    private var viewModel = ContentViewModel()
 
     public var body: some View {
         GeometryReader { geometry in

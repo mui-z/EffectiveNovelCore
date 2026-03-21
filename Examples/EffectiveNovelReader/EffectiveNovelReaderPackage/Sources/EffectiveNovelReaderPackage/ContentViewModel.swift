@@ -2,68 +2,72 @@
 // Created by osushi on 2022/10/10.
 //
 
-import Foundation
-import EffectiveNovelCore
 import Combine
+import EffectiveNovelCore
+import Foundation
+import Observation
 
-class ContentViewModel: ObservableObject {
+@Observable
+@MainActor
+final class ContentViewModel {
 
-    @Published
-    var displayText = "let's tap."
+  var displayText = "let's tap."
 
-    let controller = EFNovelController()
+  @ObservationIgnored
+  private let controller = EFNovelController()
 
-    var cancellables = Set<AnyCancellable>()
+  @ObservationIgnored
+  private var cancellables = Set<AnyCancellable>()
 
-    var nowEvent: DisplayEvent?
+  @ObservationIgnored
+  private var nowEvent: DisplayEvent?
 
-    init() {
-        let result = controller.load(raw: novelText)
+  init() {
+    let result = controller.load(raw: novelText)
 
-        switch result {
-        case .valid(let script):
-            displayingText(script: script)
-        case .invalid:
-            displayText = "invalid novel text"
-        }
+    switch result {
+    case .valid(let script):
+      displayingText(script: script)
+    case .invalid:
+      displayText = "invalid novel text"
     }
+  }
 
-    func tapScreen() {
-        switch nowEvent {
-        case .tapWait:
-            controller.resume()
-        case .tapWaitAndNewline:
-            displayText += "\n"
-            controller.resume()
-        default:
-            controller.showTextUntilWaitTag()
-        }
+  func tapScreen() {
+    switch nowEvent {
+    case .tapWait:
+      controller.resume()
+    case .tapWaitAndNewline:
+      displayText += "\n"
+      controller.resume()
+    default:
+      controller.showTextUntilWaitTag()
     }
+  }
 
-    private func displayingText(script: EFNovelScript) {
-        displayText = ""
+  private func displayingText(script: EFNovelScript) {
+    displayText = ""
 
-        controller.start(script: script)
-                  .receive(on: RunLoop.main)
-                  .sink { [unowned self] event in
-                      nowEvent = event
-                      handleEvent(event: event)
-                  }
-                  .store(in: &cancellables)
+    controller.start(script: script)
+      .receive(on: RunLoop.main)
+      .sink { [unowned self] event in
+        nowEvent = event
+        handleEvent(event: event)
+      }
+      .store(in: &cancellables)
 
+  }
+
+  private func handleEvent(event: DisplayEvent) {
+    switch event {
+    case .character(let char):
+      displayText += String(char)
+    case .newline:
+      displayText += "\n"
+    case .clear:
+      displayText = ""
+    default:
+      break
     }
-
-    private func handleEvent(event: DisplayEvent) {
-        switch event {
-        case .character(let char):
-            displayText += String(char)
-        case .newline:
-            displayText += "\n"
-        case .clear:
-            displayText = ""
-        default:
-            break
-        }
-    }
-
+  }
 }

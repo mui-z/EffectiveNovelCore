@@ -6,11 +6,13 @@ import XCTest
 import Combine
 @testable import EffectiveNovelCore
 
+@MainActor
 final class ControllerTest: XCTestCase {
-  
-  var cancellables: Set<AnyCancellable> = []
-  
-  override func tearDown() {
+
+  /// Storage is only touched from `@MainActor` tests; isolation is relaxed so `tearDown` can clear it.
+  nonisolated(unsafe) var cancellables: Set<AnyCancellable> = []
+
+  override nonisolated func tearDown() {
     cancellables = []
     super.tearDown()
   }

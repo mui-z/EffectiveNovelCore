@@ -2,6 +2,11 @@
 
 Effective Novel Core Example iOS Project
 
+## Requirements
+
+- iOS **17**+ (SwiftUI + [Observation](https://developer.apple.com/documentation/observation); `@Observable` view model)
+- Swift **6** (see `EffectiveNovelReaderPackage/Package.swift`)
+
 ## Demo
 
 ![output](https://user-images.githubusercontent.com/93278577/199856220-e8560b14-5e93-431d-8afc-3fe454690d46.gif)
