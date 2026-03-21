@@ -27,6 +27,9 @@ protocol EFNovelControllerProtocol {
 @MainActor
 public final class EFNovelController: EFNovelControllerProtocol {
 
+  /// Used for the post-start delay so playback works without a spinning `RunLoop.main` (e.g. CLI tools).
+  private static let playbackOutputScheduler = DispatchQueue(label: "dev.effectivenovel.controller.playbackOutput")
+
   public init() {}
 
   @Injected(\.validateScriptUseCase)
@@ -61,7 +64,7 @@ public final class EFNovelController: EFNovelControllerProtocol {
     }
 
     return privateOutputStream
-      .delay(for: 0.1, scheduler: RunLoop.main)
+      .delay(for: 0.1, scheduler: Self.playbackOutputScheduler)
       .eraseToAnyPublisher()
   }
 

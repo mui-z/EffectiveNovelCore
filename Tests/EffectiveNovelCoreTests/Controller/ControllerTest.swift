@@ -2,8 +2,9 @@
 // Created by osushi on 2022/09/23.
 //
 
-import XCTest
 import Combine
+import Foundation
+import XCTest
 @testable import EffectiveNovelCore
 
 @MainActor
@@ -39,6 +40,7 @@ final class ControllerTest: XCTestCase {
     switch result {
       case .valid(let script):
         controller.start(script: script)
+          .receive(on: DispatchQueue.main)
           .sink { _ in
             expectation.fulfill()
           }
@@ -64,6 +66,7 @@ final class ControllerTest: XCTestCase {
     switch result {
       case .valid(let script):
         controller.start(script: script)
+          .receive(on: DispatchQueue.main)
           .sink { event in
             expectation.fulfill()
             switch event {
@@ -95,6 +98,7 @@ final class ControllerTest: XCTestCase {
     switch result {
       case .valid(let script):
         controller.start(script: script)
+          .receive(on: DispatchQueue.main)
           .sink { _ in
             expectation.fulfill()
             controller.interrupt()
@@ -120,6 +124,7 @@ final class ControllerTest: XCTestCase {
     switch result {
       case .valid(let script):
         controller.start(script: script)
+          .receive(on: DispatchQueue.main)
           .delay(for: 0.001, scheduler: RunLoop.main)
           .sink { event in
             expectation.fulfill()
@@ -151,6 +156,7 @@ final class ControllerTest: XCTestCase {
     switch result {
       case .valid(let script):
         controller.start(script: script)
+          .receive(on: DispatchQueue.main)
           .delay(for: 0.001, scheduler: RunLoop.main)
           .sink { event in
             expectation.fulfill()
@@ -181,6 +187,7 @@ final class ControllerTest: XCTestCase {
         
       case .valid(let script):
         controller.start(script: script)
+          .receive(on: DispatchQueue.main)
           .sink { event in
             expectation.fulfill()
             
@@ -214,6 +221,7 @@ final class ControllerTest: XCTestCase {
     switch result {
       case .valid(let script):
         controller.start(script: script)
+          .receive(on: DispatchQueue.main)
           .sink { _ in
             expectation.fulfill()
           }
@@ -239,6 +247,7 @@ final class ControllerTest: XCTestCase {
     switch result {
       case .valid(let script):
         controller.start(script: script)
+          .receive(on: DispatchQueue.main)
           .sink { _ in
             expectation.fulfill()
           }
@@ -264,6 +273,7 @@ final class ControllerTest: XCTestCase {
     switch result {
       case .valid(let script):
         controller.start(script: script)
+          .receive(on: DispatchQueue.main)
           .sink { event in
             expectation.fulfill()
             

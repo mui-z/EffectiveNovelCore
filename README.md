@@ -139,9 +139,9 @@ controller.interrupt()
 ```
 
 ## Examples
-- [ ] CUI novel reader
+- [x] CUI novel reader — [`Examples/EffectiveNovelCLI`](Examples/EffectiveNovelCLI) (macOS terminal, **Enter** = tap)
 - [x] iOS novel reader
-  - [EffectiveNovelReader](https://github.com/mui-z/EffectiveNovelReader) — bundled example under `Examples/` targets **iOS 17+** (`@Observable` / Observation)
+  - [EffectiveNovelReader](https://github.com/mui-z/EffectiveNovelReader) — bundled example under `Examples/EffectiveNovelReader` targets **iOS 17+** (`@Observable` / Observation)
 
 ## Todo
 - [ ] value input

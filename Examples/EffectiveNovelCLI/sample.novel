@@ -1,0 +1,5 @@
+# Quick test script — short delays, tap-wait, end tag
+[setDefaultDelay speed=15]
+Hello from sample.novel[tw]
+Line two after Enter.[n]
+Done.[e]
